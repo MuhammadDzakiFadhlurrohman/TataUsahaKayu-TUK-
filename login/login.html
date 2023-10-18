@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medco Papua - Login</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/logos/Medco-papua.ico">
+    
+    <!-- CSS links -->
+    <link rel="stylesheet" href="../assets/styles/bootstrap_v4/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/styles/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/styles/Ionicons/css/ionicons.css">
+    <link rel="stylesheet" href="../assets/styles/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="../assets/dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="../assets/styles/DataTables/datatables.css">
+    <link rel="stylesheet" href="../assets/dist/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="login-page" style="min-height: 496.781px;">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>Login</b></a>
+        </div>
+    
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                <form class="login100-form validate-form" action="loginproses.php" method="POST">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="Username" placeholder="Username" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="User_Password" placeholder="Password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember">Remember Me</label>
+                            </div>
+                        </div>
+        
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </div>
+                </form>  
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/styles/Jquery3/jquery-3.7.1.js"></script>
+    <script src="../assets/styles/bootstrap_v4/js/bootstrap.js"></script>
+    <script src="../assets/dist/js/adminlte.js"></script>
+</body>
+</html>
