@@ -31,7 +31,7 @@
         <!-- Top header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="../dashboard.html" class="logo" style="height: 54px;">
+            <a href="../../dashboard.html" class="logo" style="height: 54px;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">
                     <img src="../../assets/images/logos/Medco papua.png" alt="">
@@ -65,7 +65,7 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../../login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -138,8 +138,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
-                        <li><a href="../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
+                        <li><a href="../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
+                        <li class="active"><a href="../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                     </ul>
                 </li>
                 <li>
@@ -155,12 +155,12 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    <b>Pengukuran</b>
+                    <b>Hauling</b>
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-book"></i>&nbsp;Tata Usaha Kayu&nbsp;</a></li>
-                    <li class="active"><span class="font-weight-bolder">&nbsp;Pengukuran&nbsp;</span></li>
+                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;User&nbsp;</a></li>
+                    <li class="active"><span class="font-weight-bolder">&nbsp;Users&nbsp;</span></li>
                 </ol>
             </section>
         
@@ -171,65 +171,26 @@
                     <div class="col-md col-sm col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline">List Pengukuran</h4>
-                                <span class="float-right"><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
+                                <h4 class="card-title d-inline">Hauling</h4>
+                                <span class="float-right"><a class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
                             </div> 
                             <!-- Card Body -->
                             <div class="card-body">
-                                <table id="UserList" class="table table-bordered display table-hover table-responsive" style="width:100%" >
+                                <table id="haul" class="table table-bordered display table-hover" style="width:100%" >
                                     <thead>
                                         <tr class="text-small">
-                                            <th style="width: 10px">#</th>
-                                            <th style="max-width: 70px">No. Petak</th>
-                                            <th style="max-width: 200px">Kontraktor Harvesting</th>
-                                            <th style="max-width: 150px">SPK Harvesting</th>
-                                            <th style="max-width: 100px">Tanggal Ukur</th>
-                                            <th style="max-width: 70px">Jenis</th>
-                                            <th style="max-width: 200px">Sortimen</th>
-                                            <th style="max-width: 150px">Tumpukan</th>
-                                            <th style="max-width: 100px">No. Batang</th>
-                                            <th style="max-width: 150px">Diameter</th>
-                                            <th style="max-width: 70px">P</th>
-                                            <th style="max-width: 70px">L</th>
-                                            <th style="max-width: 70px">T</th>
-                                            <th style="max-width: 100px">Scaler</th>
-                                            <th style="max-width: 100px">Pengawas</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
+                                            <th style="width: center">Stock Kayu Saat Ini
+                                            <?php
                                     include "../../config/connection.php";
-                                    $no = 0;
-                                    $query = mysqli_query($connect, "SELECT * from pengukuran_kayu");
+                                    $query = mysqli_query($connect, "SELECT hauling.total from hauling");
                                     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
                                     {
-                                        ?>
-                                        <tr class="text-center text-small">
-                                            <td><?php echo $no = $no+1;?></td>
-                                            <td><?php echo $row['NoPetak'];?></td>
-                                            <td><?php echo $row['Kontraktor_Harvesting'];?></td>
-                                            <td><?php echo $row['NoSPK_Harvesting'];?></td>
-                                            <td><?php echo $row['Tanggal_Ukur'];?></td>
-                                            <td><?php echo $row['Jenis_Tanaman'];?></td>
-                                            <td><?php echo $row['Sortimen_Kayu'];?></td>
-                                            <td><?php echo $row['NoTumpukan'];?></td>
-                                            <td><?php echo $row['NoBatang'];?></td>
-                                            <td><?php echo $row['Diameter'];?></td>
-                                            <td><?php echo $row['Panjang'];?></td>
-                                            <td><?php echo $row['Lebar'];?></td>
-                                            <td><?php echo $row['Tinggi'];?></td>
-                                            <td><?php echo $row['Nama_Scaller'];?></td>
-                                            <td><?php echo $row['Nama_Pengawas'];?></td>
-                                            <td>
-                                            <div class="d-inline"><a id="0" href="javascript:void(0)" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" onclick="editFun(0)"><i class="fa fa-pencil"></i></a></div>
-                                                <div class="d-inline" ><a href="javascript:void(0)" onclick="event.preventDefault(0);document.remove()" class="btn btn-danger"><i class="fa fa-trash"></i></a></div>
-                                                <form id="usr-del-1" action="javascript:void(0)"></form>
-                                            </td>
-                                        </tr>
+                                        ?>                        
+                                            <?php echo $row['total'];?>
                                         <?php } ?>
-                                        </tr> 
-                                    </tbody>
+                                        </th>
+                                        </tr>
+                                    </thead>
                                 </table>
                             </div>
                             <!-- Card Footer-->
@@ -237,165 +198,12 @@
                     </div>
                 </div>
             </section>
-            <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">New Partner Record</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="InputForm" action="pengukuranproses.php" method="post">
-                            <div class="container">
-                                <div class="form-group row">
-                                    <div class="col-md-4">No. Petak</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <select id="NoPetak" name="NoPetak" class="form-control" >
-                                    <?php
-                                         include "../../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from rkt");
-                                        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
-                                        }
-                                        ?>   
-                                    </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Kontraktor Harvesting</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <select id="Nama_Kontraktor" name="Nama_Kontraktor" class="form-control" >
-                                            <option value="">Pilih Kontraktor</option>
-                                            <?php
-                                            include "../config/connection.php";
-                                            $query = mysqli_query($connect, "SELECT * from rekanan");
-                                            while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                            echo '<option value="' . $row['Nama_Kontraktor'] . '">' . $row['Nama_Kontraktor'] . '</option>';
-                                            }
-                                            ?>   
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">SPK Harvesting</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                       <input type="text" name="NoSPK_Harvesting" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Tanggal Ukur</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="date" name="Tanggal_Ukur" class="form-control" placeholder="Tanggal Ukur">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Jenis Kayu</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <select id="Jenis_Tanaman" name="Jenis_Tanaman" class="form-control">
-                                            <option value="">Pilih Jenis Tanaman</option>
-                                            <option value="E. Pelita (HTI)">E. Pelita (HTI)</option>
-                                            <option value="Accasia M. (HTI)">Accasia M. (HTI)</option>
-                                            <option value="Rimba Campuran (MHV)">Rimba Campuran (MHV)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Sortimen</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="1.0m"> 1.0 m 
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="2.5m"> 2.5 m
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="2.8m"> 2.8 m 
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="4.2m"> 4.2 m
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">No. Tumpukan</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="NoTumpukan" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">No. Batang</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="NoBatang" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Diameter</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input type="text" name="Diameter" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">P</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input type="text" name="Panjang" class="form-control" >
-                                    </div>
-                                    </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">L</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input type="text" name="Lebar" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">T</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input type="text" name="Tinggi" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Nama Scaler</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="Nama_Sceller" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Nama Pengawas</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="Nama_Pengawas" class="form-control" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                </div>
-            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            
+        </footer>
     </div>
     
     <!-- ./wrapper -->

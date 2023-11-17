@@ -1,9 +1,17 @@
+<?php
+session_start();
+include "config/connection.php";
+if(isset($_SESSION['Username'])==0)
+{
+  echo '<script>alert("ANDA HARUS LOGIN..!!");window.location.href="login/login.html"</script>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medco Papua</title>
+    <title>Tata Usaha Kayu</title>
     <link rel="icon" type="image/x-icon" href="assets/images/logos/Medco-papua.ico">
     
     <!-- Css link -->
@@ -31,13 +39,13 @@
         <!-- Top header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="dashboard.html" class="logo" style="height: 54px;">
+            <a href="dashboard.php" class="logo" style="height: 54px;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">
-                    <img src="assets/images/logos/Medco papua.png" alt="">
+                    <img src="assets/images/logos/Medco papua.png">
                 </span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><img src="assets/images/logos/Medco papua.png" alt=""><b style="font-weight: 700;">M</b>edco Papua</span>
+                <span class="logo-lg"><img src="assets/images/logos/Medco papua.png"><b style="font-weight: 700;">M</b>edco Papua</span>
             </a>
     
             <!-- Header Navbar: style can be found in header.less -->
@@ -53,14 +61,18 @@
                         <li class="dropdown user user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="assets/images/Avatars/avatar.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"><?php echo $_SESSION['Username'];?></span> 
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
-                                        The User
+                                    <?php echo $_SESSION['Username'];?>
+                                    <?php echo date_default_timezone_set('Asia/Jakarta');
+                                    $jam=date("Y-m-d");
+                                    echo "<small> Tanggal Hari ini <br>". $jam." "."</small>"
+                                    ?>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -84,7 +96,7 @@
                         <img src="assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Alexander Pierce</p>
+                        <p><?php echo $_SESSION['Username'];?></p>
                         <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
                     </div>
                 </div>
@@ -104,7 +116,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                        <a href="dashboard.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
+                        <a href="dashboard.php"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
                     </li>
                     <li class="treeview">
                         <a href="javascript:void(0)">
@@ -186,7 +198,7 @@
             
         </footer>
     </div>
-    
+    <?php include "config/page.php"; ?>
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="assets/styles/Jquery3/jquery-3.7.1.js"></script>

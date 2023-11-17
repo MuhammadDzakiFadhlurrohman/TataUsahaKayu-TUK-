@@ -174,16 +174,31 @@
                                 <h4 class="card-title d-inline">Kayu 4,2m</h4>
                                 <span class="float-right"><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
                                 <div>
-                    <b>Total Stock: </b>
-                    <?php
-                    include "../../../config/connection.php";
-                    $query = mysqli_query($connect, "SELECT * from hauling");
-                    while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
-                    {
-                    ?>
-                    <?php echo $row['total'];?>
-                    <?php } ?>
-                </div>
+
+                                <?php
+                                include "../../../config/connection.php";
+
+                                // Retrieve data from the hauling table
+                                $query = mysqli_query($connect, "SELECT * FROM hauling");
+
+                                // Check if the query was successful
+                                if (!$query) {
+                                    echo "Error: " . mysqli_error($connect);
+                                }
+
+                                // Fetch the total directly from the database using SQL
+                                $currentTotalQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling");
+                                $currentTotalRow = mysqli_fetch_assoc($currentTotalQuery);
+                                $currentTotal = $currentTotalRow['total'];
+
+                                // Increment the current total by 1
+                                $newTotal = $currentTotal - 1;
+                                ?>
+                                <?php
+                                echo "<div>Total: $newTotal</div>";
+                                ?>
+
+                                </div>
                             </div> 
                             <!-- Card Body -->
                             <div class="card-body">
@@ -197,11 +212,9 @@
                                             <th style="max-width: 100px">Tanggal Hauling</th>
                                             <th style="max-width: 200px">Jenis</th>
                                             <th style="max-width: 200px">Sortimen</th>
-                                            <th style="max-width: 70px">Tumpukan</th>
                                             <th style="max-width: 70px">No. Batang</th>
                                             <th style="max-width: 70px">P</th>
-                                            <th style="max-width: 70px">L</th>
-                                            <th style="max-width: 70px">T</th>
+                                            <th style="max-width: 70px">Diameter</th>
                                             <th style="max-width: 70px">M3</th>
                                             <th style="max-width: 100px">Operator</th>
                                             <th style="max-width: 70px">No. Alat</th>
@@ -229,11 +242,9 @@
                                             <td><?php echo $row['Tanggal_Hauling'];?></td>
                                             <td><?php echo $row['Jenis_Kayu'];?></td>
                                             <td><?php echo $row['Sortimen'];?></td>
-                                            <td><?php echo $row['NoTumpukan'];?></td>
                                             <td><?php echo $row['NoBatang'];?></td>
                                             <td><?php echo $row['Panjang'];?></td>
                                             <td><?php echo $row['Lebar'];?></td>
-                                            <td><?php echo $row['Tinggi'];?></td>
                                             <td><?php echo $row['m3'];?></td>
                                             <td><?php echo $row['Nama_Operator'];?></td>
                                             <td><?php echo $row['NoAlat'];?></td>
@@ -276,7 +287,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="InputForm" action="haulingproses.php" method="post">
+                        <form id="InputForm" action="haulingproses42.php" method="post">
                             <div class="container">
                                 <div class="form-group row">
                                     <div class="col-md-4">No. Petak</div>
@@ -385,22 +396,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">No. Tumpukan</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <select name="NoTumpukan" class="form-control">
-                                        <option value="">-PILIH NOMOR TUMPUKAN-</option>
-                                        <?php
-                                         include "../../../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from pengukuran_kayu");
-                                        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['NoTumpukan'] . '">' . $row['NoTumpukan'] . '</option>';
-                                        }
-                                        ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <div class="col-md-4">No. Batang</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
@@ -420,22 +415,17 @@
                                     <div class="col-md-4">Panjang Tumpukan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Panjang" class="form-control" placeholder="Panjang Tumpukan">
+                                    <input type="text" name="Panjang" class="form-control" value="4.2" readonly>
                                     </div>
+                                    <div class="col-md-3">m</div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">Lebar Tumpukan</div>
+                                    <div class="col-md-4">Diameter Tumpukan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
                                     <input type="text" name="Lebar" class="form-control" placeholder="Lebar Tumpukan">
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Tinggi Tumpukan</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="Tinggi" class="form-control" placeholder="Tinggi Tumpukan">
-                                    </div>
+                                    <div class="col-md-3">cm</div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Operator Loading</div>
