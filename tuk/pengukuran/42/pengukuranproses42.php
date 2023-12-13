@@ -12,18 +12,17 @@ $NoPetak=$_POST['NoPetak'];
 $Nama_Kontraktor=$_POST['Nama_Kontraktor'];
 $NoSPK_Harvesting=$_POST['NoSPK_Harvesting'];
 $Tanggal_Ukur=$_POST['Tanggal_Ukur'];
-$Jenis_Tanaman=$_POST['Jenis_Tanaman'];
+$Jenis_Kayu=$_POST['Jenis_Kayu'];
 $Sortimen_Kayu=$_POST['Sortimen_Kayu'];
 $NoBatang=$_POST['NoBatang'];
 $Diameter=$_POST['Diameter'];
 $Panjang=$_POST['Panjang'];
-$m3=$_POST['m3'];
-$Nama_Sceller=$_POST['Nama_Sceller'];
+$Nama_Scaler=$_POST['Nama_Scaler'];
 $Nama_Pengawas=$_POST['Nama_Pengawas'];
 
-$lp = 1 / 4 * 22 / 7 * (($Diameter / 100) ** 2);
-$m3 = $lp * $Panjang * 0.6;
-$query=mysqli_query($connect, "INSERT INTO pengukuran42 VALUES ('','$NoPetak','$Nama_Kontraktor','NoSPK_Harvesting','$Tanggal_Ukur','$Jenis_Tanaman','$Sortimen_Kayu','$NoBatang','$Diameter','$Panjang','$m3','$Nama_Sceller','$Nama_Pengawas','$newTotal')");
+$m3 = ((($Diameter ** 2 ) * $Panjang ) *  0.7854) / 10000;
+
+$query=mysqli_query($connect, "INSERT INTO pengukuran42 VALUES ('','$NoPetak','$Nama_Kontraktor','NoSPK_Harvesting','$Tanggal_Ukur','$Jenis_Kayu','$Sortimen_Kayu','$NoBatang','$Diameter','$Panjang','$m3','$Nama_Scaler','$Nama_Pengawas')");
 if ($query) {
     echo '<script>
         alert("Data Berhasil Disimpan. Total Data: ' . $newTotal + 1 . '");

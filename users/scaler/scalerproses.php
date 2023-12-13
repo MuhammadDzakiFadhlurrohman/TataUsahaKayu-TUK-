@@ -1,11 +1,11 @@
 <?php
 include "../../config/connection.php";
 
-$Jenis_Sceller=$_POST['Jenis_Sceller'];
-$NIK_Sceller=$_POST['NIK_Sceller'];
-$Nama_Sceller=$_POST['Nama_Sceller'];
+$Jenis_Scaler=$_POST['Jenis_Scaler'];
+$NIK_Scaler=$_POST['NIK_Scaler'];
+$Nama_Scaler=$_POST['Nama_Scaler'];
 
-$query=mysqli_query($connect, "INSERT INTO sceller VALUES ('$Jenis_Sceller','$NIK_Sceller','$Nama_Sceller')");
+$query=mysqli_query($connect, "INSERT INTO scaler VALUES ('$Jenis_Scaler','$NIK_Scaler','$Nama_Scaler')");
 if ($query)
 	 {
 		echo '<script>

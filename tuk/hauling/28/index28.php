@@ -53,19 +53,19 @@
                         <li class="dropdown user user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../../assets/images/Avatars/avatar.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
-                                        The User
+                                        User
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../../../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../../../login/login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -79,32 +79,11 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
-                </div>
-            </div>
-            <!-- search form -->
-            <form action="javascript:void(0)" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
+            
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li>
-                    <a href="../../../dashboard.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
+                    <a href="../../../dashboard.php"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
                 </li>
                 <li class="treeview">
                     <a href="javascript:void(0)">
@@ -124,7 +103,7 @@
                     <a href="../../../rekanan/index.php"><i class="fa fa-handshake-o"></i><span>&nbsp;<b>Rekanan</b></span></a>
                 </li>
                 <li>
-                    <a href="../../../rkt/index.php"><i class="fa fa-sticky-note"></i>&nbsp;<b>Rencana Kerja</b></a>
+                    <a href="../../../rkt/index.php"><i class="fa fa-sticky-note"></i><span>&nbsp;<b>Rencana Kerja</b></span></a>
                     </a>
                 </li>
                 <li>
@@ -139,11 +118,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
-                        <li class="active"><a href="../../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
+                        <li class="active"><a href="../index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                     </ul>
-                </li>
-                <li>
-                    <a href="../../../laporan/index.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Laporan</b></span></a>
                 </li>
             </ul>
         </section>
@@ -159,8 +135,8 @@
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-book"></i>&nbsp;Tata Usaha Kayu&nbsp;</a></li>
-                    <li class="active"><span class="font-weight-bolder">&nbsp;Hauling&nbsp;</span></li>
+                        <li><a href="../index.php"><i class="fa fa-book"></i>&nbsp;Tata Usaha Kayu</a></li>
+                        <li class="active"><a href="../index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                 </ol>
             </section>
         
@@ -171,18 +147,27 @@
                     <div class="col-md col-sm col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline">Kayu 4,2m</h4>
+                                <h4 class="card-title d-inline">List Hauling Non Batang</h4>
                                 <span class="float-right"><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
                                 <div>
-                    <b>Total Stock: </b>
                     <?php
-                    include "../../../config/connection.php";
-                    $query = mysqli_query($connect, "SELECT * from hauling");
-                    while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
-                    {
-                    ?>
-                    <?php echo $row['total'];?>
-                    <?php } ?>
+                                include "../../../config/connection.php";
+                                // Retrieve data from the hauling table
+                                $query = mysqli_query($connect, "SELECT * FROM hauling28");
+                                // Check if the query was successful
+                                if (!$query) {
+                                    echo "Error: " . mysqli_error($connect);
+                                }
+                                // Fetch the total directly from the database using SQL
+                                $currentTotalQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling28");
+                                $currentTotalRow = mysqli_fetch_assoc($currentTotalQuery);
+                                $currentTotal = $currentTotalRow['total'];
+                                // Increment the current total by 1
+                                $newTotal = $currentTotal ;
+                                ?>
+                                <?php
+                                echo "<div>Total Kayu: $newTotal</div>";
+                                ?>
                 </div>
                             </div> 
                             <!-- Card Body -->
@@ -197,8 +182,7 @@
                                             <th style="max-width: 100px">Tanggal Hauling</th>
                                             <th style="max-width: 200px">Jenis</th>
                                             <th style="max-width: 200px">Sortimen</th>
-                                            <th style="max-width: 70px">Tumpukan</th>
-                                            <th style="max-width: 70px">No. Batang</th>
+                                            <th style="max-width: 70px">No. Tumpukan</th>
                                             <th style="max-width: 70px">P</th>
                                             <th style="max-width: 70px">L</th>
                                             <th style="max-width: 70px">T</th>
@@ -217,7 +201,7 @@
                                     <?php
                                     include "../../../config/connection.php";
                                     $no = 0;
-                                    $query = mysqli_query($connect, "SELECT * from hauling");
+                                    $query = mysqli_query($connect, "SELECT * from hauling28");
                                     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
                                     {
                                         ?>
@@ -230,7 +214,6 @@
                                             <td><?php echo $row['Jenis_Kayu'];?></td>
                                             <td><?php echo $row['Sortimen'];?></td>
                                             <td><?php echo $row['NoTumpukan'];?></td>
-                                            <td><?php echo $row['NoBatang'];?></td>
                                             <td><?php echo $row['Panjang'];?></td>
                                             <td><?php echo $row['Lebar'];?></td>
                                             <td><?php echo $row['Tinggi'];?></td>
@@ -240,10 +223,10 @@
                                             <td><?php echo $row['Driver'];?></td>
                                             <td><?php echo $row['NoTruck'];?></td>
                                             <td><?php echo $row['NoTrip_Angkutan'];?></td>
-                                            <td><?php echo $row['Nama_Sceller'];?></td>
+                                            <td><?php echo $row['Nama_Scaler'];?></td>
                                             <td><?php echo $row['Nama_Pengawas'];?></td>
                                             <td>
-                                            <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="h.php?id=<?=$row['No_Hauling'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -259,10 +242,6 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            
-        </footer>
-        
         <!-- Modal Input -->
         <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -274,13 +253,13 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="InputForm" action="haulingproses.php" method="post">
+                        <form id="InputForm" action="haulingproses28.php" method="post" >
                             <div class="container">
                                 <div class="form-group row">
                                     <div class="col-md-4">No. Petak</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="NoPetak" class="form-control">
+                                        <select name="NoPetak" class="form-control" required>
                                         <option value="">-PILIH NOMOR PETAK-</option>
                                         <?php
                                          include "../../../config/connection.php";
@@ -296,11 +275,11 @@
                                     <div class="col-md-4">Kontraktor Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="Kontraktor_Harvesting" class="form-control">
+                                        <select name="Kontraktor_Harvesting" class="form-control" required>
                                         <option value="">-PILIH KONTRAKTOR HARVESTING-</option>
                                         <?php
                                          include "../../../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from tebangan");
+                                        $query = mysqli_query($connect, "SELECT * from harvesting");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                         echo '<option value="' . $row['Kontraktor_Harvesting'] . '">' . $row['Kontraktor_Harvesting'] . '</option>';
                                         }
@@ -312,11 +291,11 @@
                                     <div class="col-md-4">No. SPK Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="NoSPK_Harvesting" class="form-control">
+                                        <select name="NoSPK_Harvesting" class="form-control" required>
                                             <option value="">-PILIH SPK HARVESTING-</option>
                                             <?php
                                             include "../../../config/connection.php";
-                                            $query = mysqli_query($connect, "SELECT * from tebangan");
+                                            $query = mysqli_query($connect, "SELECT * from harvesting");
                                             while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                             echo '<option value="' . $row['NoSPK'] . '">' . $row['NoSPK'] . '</option>';
                                             }
@@ -328,7 +307,7 @@
                                     <div class="col-md-4">Kontraktor Hauling</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="Kontraktor_Hauling" class="form-control">
+                                        <select name="Kontraktor_Hauling" class="form-control" required>
                                             <option value="">-PILIH KONTRAKTOR HAULING</option>
                                             <?php
                                             include "../../../config/connection.php";
@@ -344,53 +323,25 @@
                                     <div class="col-md-4">No. SPK Hauling</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="NoSPK_Hauling" class="form-control" placeholder="NO. SPK Hauling">
+                                    <input type="text" name="NoSPK_Hauling" class="form-control" placeholder="NO. SPK Hauling" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Tanggal Hauling</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="date" name="Tanggal_Hauling" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Jenis Kayu</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <select name="Jenis_Kayu" class="form-control">
-                                        <option value="">-PILIH JENIS KAYU-</option>
-                                        <?php
-                                         include "../../../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from pengukuran_kayu");
-                                        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['Jenis_Tanaman'] . '">' . $row['Jenis_Tanaman'] . '</option>';
-                                        }
-                                        ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Sortimen</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <select name="Sortimen" class="form-control">
-                                            <option value="1">1 M</option>
-                                            <option value="2.8">2.8 M</option>
-                                            <option value="3.8">3.8 M</option>
-                                            <option value="4.2">4.2 M</option>
-                                        </select>
+                                        <input type="date" name="Tanggal_Hauling" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">No. Tumpukan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="NoTumpukan" class="form-control">
+                                        <select name="NoTumpukan" class="form-control" onchange="jenis()" required>
                                         <option value="">-PILIH NOMOR TUMPUKAN-</option>
                                         <?php
                                          include "../../../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from pengukuran_kayu");
+                                        $query = mysqli_query($connect, "SELECT * from pengukuran28");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                         echo '<option value="' . $row['NoTumpukan'] . '">' . $row['NoTumpukan'] . '</option>';
                                         }
@@ -399,53 +350,44 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">No. Batang</div>
+                                    <div class="col-md-4">Jenis Kayu</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <select name="NoBatang" class="form-control">
-                                        <option value="">-PILIH NOMOR TUMPUKAN-</option>
-                                        <?php
-                                         include "../../../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from pengukuran_kayu");
-                                        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['NoBatang'] . '">' . $row['NoBatang'] . '</option>';
-                                        }
-                                        ?>
-                                        </select>
+                                    <input name="Jenis_Kayu" class="form-control" readonly onchange="jenis()" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Panjang Tumpukan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Panjang" class="form-control" placeholder="Panjang Tumpukan">
+                                    <input type="text" name="Panjang" class="form-control" placeholder="Panjang Tumpukan" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Lebar Tumpukan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Lebar" class="form-control" placeholder="Lebar Tumpukan">
+                                    <input type="text" name="Lebar" class="form-control" placeholder="Lebar Tumpukan" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Tinggi Tumpukan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Tinggi" class="form-control" placeholder="Tinggi Tumpukan">
+                                    <input type="text" name="Tinggi" class="form-control" placeholder="Tinggi Tumpukan" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Operator Loading</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="Nama_Operator" class="form-control">
+                                        <select name="Nama_Operator" class="form-control" required>
                                         <option value="">-PILIH OPERATOR LOADING-</option>
                                         <?php
                                          include "../../../config/connection.php";
                                         $query = mysqli_query($connect, "SELECT * from operator");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['Nama_Sceller'] . '">' . $row['Nama_Sceller'] . '</option>';
+                                        echo '<option value="' . $row['Nama_Scaler'] . '">' . $row['Nama_Scaler'] . '</option>';
                                         }
                                         ?>
                                         </select>
@@ -455,7 +397,7 @@
                                     <div class="col-md-4">No. Alat</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="NoAlat" class="form-control">
+                                        <select name="NoAlat" class="form-control" required>
                                             <option value="">-PILIH NOMOR ALAT-</option>
                                             <?php
                                             include "../../../config/connection.php";
@@ -471,13 +413,13 @@
                                     <div class="col-md-4">Driver Hauling</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="Driver" class="form-control">
+                                        <select name="Driver" class="form-control" required>
                                         <option value="">-PILIH DRIVER HAULING-</option>
                                         <?php
                                          include "../../../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from sceller");
+                                        $query = mysqli_query($connect, "SELECT * from Scaler");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['Nama_Sceller'] . '">' . $row['Nama_Sceller'] . '</option>';
+                                        echo '<option value="' . $row['Nama_Scaler'] . '">' . $row['Nama_Scaler'] . '</option>';
                                         }
                                         ?>
                                         </select>
@@ -487,28 +429,28 @@
                                     <div class="col-md-4">No. Truck</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="NoTruck" class="form-control" placeholder="No. Truck">
+                                        <input type="text" name="NoTruck" class="form-control" placeholder="No. Truck" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">No. Trip Angkutan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="NoTrip_Angkutan" class="form-control" placeholder="No. Trip Angkutan">
+                                        <input type="text" name="NoTrip_Angkutan" class="form-control" placeholder="No. Trip Angkutan" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">Sceller</div>
+                                    <div class="col-md-4">Scaler</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="Nama_Sceller" class="form-control" placeholder="Nama_Sceller">
+                                        <input type="text" name="Nama_Scaler" class="form-control" placeholder="Nama_Scaler" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Pengawas Hauling</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select name="Nama_Pengawas" class="form-control">
+                                        <select name="Nama_Pengawas" class="form-control" required>
                                         <option value="">-PILIH PENGAWAS HAULING-</option>
                                         <?php
                                          include "../../../config/connection.php";
@@ -525,6 +467,24 @@
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
+                            <script>
+                                  document.getElementById("NoTumpukan").addEventListener("change", function jenis() {
+                                  var pilihan = this.value;
+                                  var jenis = "";
+
+                                  <?php
+                                  $query = mysqli_query($connect, "SELECT * from pengukuran28");
+                                  while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
+                                        echo 'if (pilihan === "' . $row['NoTumpukan'] . '") {';
+                                        echo 'jenis = "' . $row['Jenis_Kayu'] . '";';
+                                        echo '}';
+                                  }
+                                  ?>
+                                  
+
+                                  document.getElementsByName("Jenis_Kayu")[0].value = jenis;
+                                });
+                                </script>
                         </form>
                     </div>
                 </div>
@@ -546,7 +506,7 @@
     <script>
         new DataTable('#UserList');
     </script>
-    <script src="../../../assets/example/hauling.js"></script>
+    <script src="../../../assets/example/hauling28.js"></script>
     <!-- Sparkline -->
     <script src="../../../assets/styles/jquery-sparkline/dist/jquery.sparkline.js"></script>
     <!-- jvectormap  -->

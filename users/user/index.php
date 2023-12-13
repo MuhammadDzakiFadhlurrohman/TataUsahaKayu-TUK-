@@ -31,7 +31,7 @@
         <!-- Top header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="../../dashboard.html" class="logo" style="height: 54px;">
+            <a href="../../dashboard.php" class="logo" style="height: 54px;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">
                     <img src="../../assets/images/logos/Medco papua.png" alt="">
@@ -53,19 +53,19 @@
                         <li class="dropdown user user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../assets/images/Avatars/avatar.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
-                                        The User
+                                        User
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../../login/login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -78,33 +78,11 @@
        <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
-                </div>
-            </div>
-            <!-- search form -->
-            <form action="javascript:void(0)" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li>
-                    <a href="../../dashboard.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
+                    <a href="../../dashboard.php"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
                 </li>
                 <li class="treeview">
                     <a href="javascript:void(0)">
@@ -124,7 +102,7 @@
                     <a href="../../rekanan/index.php"><i class="fa fa-handshake-o"></i><span>&nbsp;<b>Rekanan</b></span></a>
                 </li>
                 <li>
-                    <a href="../../rkt/index.php"><i class="fa fa-sticky-note"></i>&nbsp;<b>Rencana Kerja</b></a>
+                    <a href="../../rkt/index.php"><i class="fa fa-sticky-note"></i><span>&nbsp;<b>Rencana Kerja</b></span></a>
                     </a>
                 </li>
                 <li>
@@ -142,9 +120,6 @@
                         <li><a href="../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="../../laporan/index.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Laporan</b></span></a>
-                </li>
             </ul>
         </section>
     <!-- /.sidebar -->
@@ -159,7 +134,7 @@
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;User&nbsp;</a></li>
+                    <li><a href="index.php" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;User&nbsp;</a></li>
                     <li class="active"><span class="font-weight-bolder">&nbsp;Users&nbsp;</span></li>
                 </ol>
             </section>
@@ -202,7 +177,7 @@
                                             <td><?php echo $row['Jabatan'];?></td>
                                             <td><?php echo $row['Otorisasi'];?></td>
                                             <td>
-                                            <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="h.php?id=<?=$row['Username'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -268,10 +243,6 @@
                 </div>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            
-        </footer>
     </div>
     
     <!-- ./wrapper -->

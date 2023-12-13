@@ -34,7 +34,7 @@ include "../config/connection.php";
         <!-- Top header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="../dashboard.html" class="logo" style="height: 54px;">
+            <a href="../dashboard.php" class="logo" style="height: 54px;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">
                     <img src="../assets/images/logos/Medco papua.png" alt="">
@@ -56,19 +56,19 @@ include "../config/connection.php";
                         <li class="dropdown user user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../assets/images/Avatars/avatar.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs"><?php echo $_SESSION['Username'];?></span>
+                               
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
-                                    <?php echo $_SESSION['Username'];?>
+                                    User
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../login/login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -81,29 +81,6 @@ include "../config/connection.php";
        <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p><?php echo $_SESSION['Username'];?></p>
-                    <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
-                </div>
-            </div>
-            <!-- search form -->
-            <form action="javascript:void(0)" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
@@ -127,7 +104,7 @@ include "../config/connection.php";
                 <a href="../rekanan/index.php"><i class="fa fa-handshake-o"></i><span>&nbsp;<b>Rekanan</b></span></a>
             </li>
             <li>
-                <a href="../rkt/index.php"><i class="fa fa-sticky-note"></i>&nbsp;<b>Rencana Kerja</b></a>
+                <a href="../rkt/index.php"><i class="fa fa-sticky-note"></i><span>&nbsp;<b>Rencana Kerja</b></span></a>
                 </a>
             </li>
             <li class="active">
@@ -145,9 +122,6 @@ include "../config/connection.php";
                     <li><a href="../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="../laporan/index.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Laporan</b></span></a>
-            </li>
         </ul>
     </section>
     <!-- /.sidebar -->
@@ -162,7 +136,7 @@ include "../config/connection.php";
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-tree"></i>&nbsp;Harvesting&nbsp;</a></li>
+                    <li><a href="index.php" class="font-weight-bolder"><i class="fa fa-tree"></i>&nbsp;Harvesting&nbsp;</a></li>
                     <li class="active"><span class="font-weight-bolder">&nbsp;Tree Log&nbsp;</span></li>
                 </ol>
             </section>
@@ -174,7 +148,7 @@ include "../config/connection.php";
                     <div class="col-md col-sm col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline">Tree Log List</h4>
+                                <h4 class="card-title d-inline">List Tebangan</h4>
                                 <span class="float-right"><a class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
                             </div> 
                             <!-- Card Body -->
@@ -190,13 +164,15 @@ include "../config/connection.php";
                                             <th style="max-width: 70px">Kontraktor Harvesting</th>
                                             <th style="max-width: 70px">No. SPK</th>
                                             <th style="max-width: 70px">Luas Tebangan</th>
+                                            <th style="max-width: 70px">Tanggal Mulai</th>
+                                            <th style="max-width: 70px">Tanggal Berakhir</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <?php
                                     include "../config/connection.php";
                                     $no = 0;
-                                    $query = mysqli_query($connect, "SELECT * from tebangan");
+                                    $query = mysqli_query($connect, "SELECT * from harvesting");
                                     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
                                     {
                                         ?>                               
@@ -210,8 +186,10 @@ include "../config/connection.php";
                                             <td><?php echo $row['Kontraktor_Harvesting'];?></td>
                                             <td><?php echo $row['NoSPK'];?></td>
                                             <td><?php echo $row['Luasan_Tebangan'];?></td>
+                                            <td><?php echo $row['Tanggal_Mulai'];?></td>
+                                            <td><?php echo $row['Tanggal_Berakhir'];?></td>
                                             <td>
-                                            <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="h.php?id=<?=$row['No_Tebangan'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -240,7 +218,8 @@ include "../config/connection.php";
                                     <div class="col-md-4">No. Petak</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Nopetak" name="NoPetak" class="form-control" onchange="luas()">
+                                        <select id="Nopetak" name="NoPetak" class="form-control" onchange="luas()" required>
+                                        <option value="">-PILIH NOMOR PETAK-</option>
                                         <?php
                                          include "../config/connection.php";
                                         $query = mysqli_query($connect, "SELECT * from rkt");
@@ -255,28 +234,29 @@ include "../config/connection.php";
                                     <div class="col-md-4">Luasan Petak</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input name="Luasan_Petak" class="form-control" readonly onchange="luas()">
+                                        <input name="Luasan_Petak" class="form-control" readonly onchange="luas()" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Jenis Tanaman</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input name="Jenis_Tanaman" class="form-control" readonly onchange="luas()">
+                                        <input name="Jenis_Tanaman" class="form-control" readonly onchange="luas()" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Tanggal Tanam</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input name="Tanggal_Tanam" class="form-control" readonly onchange="luas()">
+                                        <input name="Tanggal_Tanam" class="form-control" readonly onchange="luas()" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Kontraktor Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Kontraktor_Harvesting" name="Kontraktor_Harvesting" class="form-control">
+                                        <select id="Kontraktor_Harvesting" name="Kontraktor_Harvesting" class="form-control" required>
+                                        <option value="">-PILIH KONTRAKTOR HARVESTING-</option>
                                         <?php
                                          include "../config/connection.php";
                                         $query = mysqli_query($connect, "SELECT * from rekanan");
@@ -291,14 +271,14 @@ include "../config/connection.php";
                                     <div class="col-md-4">No. SPK</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="NoSPK" class="form-control" >
+                                        <input type="text" name="NoSPK" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Luasan Tebangan</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="Luasan_Tebangan" class="form-control" >
+                                        <input type="text" name="Luasan_Tebangan" class="form-control" required>
                                     </div>
                                 </div>
                                 <script>
@@ -325,7 +305,16 @@ include "../config/connection.php";
                                   document.getElementsByName("Tanggal_Tanam")[0].value = tanggal;
                                 });
                                 </script>
-
+                                <div class="form-group row">
+                                    <div class="col-md-4">Tanggal Tebang</div>
+                                    <div class="col-md-1">:</div>
+                                    <div class="col-md">
+                                        Tanggal Mulai
+                                        <input type="date" name="Tanggal_Mulai" class="form-control" placeholder="Tanggal Mulai" required>
+                                        Tanggal Berakhir
+                                        <input type="date" name="Tanggal_Berakhir" class="form-control" placeholder="Tanggal Berakhir" required>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" name="save" class="btn btn-primary">
@@ -338,9 +327,6 @@ include "../config/connection.php";
         </div>
             <!-- /.content -->
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            
-        </footer>
     </div>
     
     <!-- ./wrapper -->

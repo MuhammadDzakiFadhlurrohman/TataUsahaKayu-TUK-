@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medco Papua</title>
     <link rel="icon" type="image/x-icon" href="../../assets/images/logos/Medco-papua.ico">
-    
+
     <!-- Css link -->
     <link rel="stylesheet" href="../../assets/styles/bootstrap_v4/css/bootstrap.css">
     <!-- Font Awesome -->
@@ -22,12 +23,12 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../assets/dist/css/skins/_all-skins.css">
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-  
+
         <!-- Top header -->
         <header class="main-header">
             <!-- Logo -->
@@ -39,7 +40,7 @@
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><img src="../../assets/images/logos/Medco papua.png" alt=""><b style="font-weight: 700;">M</b>edco Papua</span>
             </a>
-    
+
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top py-0">
                 <!-- Sidebar toggle button-->
@@ -53,19 +54,19 @@
                         <li class="dropdown user user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../assets/images/Avatars/avatar.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
-                                        The User
+                                        User
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../../login/login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -73,97 +74,74 @@
                 </div>
             </nav>
         </header>
-        
+
         <!-- Left side column. contains the logo and sidebar -->
-       <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
-                </div>
-            </div>
-            <!-- search form -->
-            <form action="javascript:void(0)" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
-                <li>
-                    <a href="../../dashboard.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
-                </li>
-                <li class="treeview">
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-table"></i><span>&nbsp;<b>User</b></span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../../users/user/index.php"><i class="fa fa-circle-o"></i>&nbsp;User</a></li>
-                        <li><a href="../../users/pengawas/pengawas.php"><i class="fa fa-circle-o"></i>&nbsp;Supervisor</a></li>
-                        <li><a href="../../users/scaler/scaler.php"><i class="fa fa-circle-o"></i>&nbsp;Scaler</a></li>
-                        <li><a href="../../users/operator/operator.php"><i class="fa fa-circle-o"></i>&nbsp;Operator</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="../../rekanan/index.php"><i class="fa fa-handshake-o"></i><span>&nbsp;<b>Rekanan</b></span></a>
-                </li>
-                <li>
-                    <a href="../../rkt/index.php"><i class="fa fa-sticky-note"></i>&nbsp;<b>Rencana Kerja</b></a>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../harvesting/index.php"><i class="fa fa-tree"></i><span>&nbsp;<b>Tebangan</b></span></a>
-                </li>
-                <li class="treeview">
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-book"></i><span>&nbsp;<b>Tata Usaha Kayu</b></span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li>
+                        <a href="../../dashboard.php"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-table"></i><span>&nbsp;<b>User</b></span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="../../users/user/index.php"><i class="fa fa-circle-o"></i>&nbsp;User</a></li>
+                            <li><a href="../../users/pengawas/pengawas.php"><i class="fa fa-circle-o"></i>&nbsp;Supervisor</a></li>
+                            <li><a href="../../users/scaler/scaler.php"><i class="fa fa-circle-o"></i>&nbsp;Scaler</a></li>
+                            <li><a href="../../users/operator/operator.php"><i class="fa fa-circle-o"></i>&nbsp;Operator</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../rekanan/index.php"><i class="fa fa-handshake-o"></i><span>&nbsp;<b>Rekanan</b></span></a>
+                    </li>
+                    <li>
+                        <a href="../../rkt/index.php"><i class="fa fa-sticky-note"></i><span>&nbsp;<b>Rencana Kerja</b></span></a>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../harvesting/index.php"><i class="fa fa-tree"></i><span>&nbsp;<b>Tebangan</b></span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-book"></i><span>&nbsp;<b>Tata Usaha Kayu</b></span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
                         <li><a href="../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
                         <li class="active"><a href="../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="../../laporan/index.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Laporan</b></span></a>
-                </li>
-            </ul>
-        </section>
-    <!-- /.sidebar -->
-    </aside>
-  
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    <b>Hauling</b>
+                    <b>Hauling Category</b>
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;User&nbsp;</a></li>
-                    <li class="active"><span class="font-weight-bolder">&nbsp;Users&nbsp;</span></li>
+                    <li><a href="../index.php"><i class="fa fa-book"></i>&nbsp;Tata Usaha Kayu</a></li>
+                    <li class="active"><span class="font-weight-bolder">&nbsp;Hauling&nbsp;</span></li>
                 </ol>
             </section>
-        
+
             <!-- Main content -->
             <section class="content">
                 <!-- Main row -->
@@ -172,40 +150,56 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title d-inline">Hauling</h4>
-                                <span class="float-right"><a class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
-                            </div> 
+                                <div>
+                                <?php
+                            include "../../config/connection.php";
+
+                            // Retrieve data from the hauling42 table
+                            $queryHauling42 = mysqli_query($connect, "SELECT * FROM hauling42");
+                            if (!$queryHauling42) {
+                                echo "Error: " . mysqli_error($connect);
+                            }
+
+                            // Retrieve data from the hauling28 table
+                            $queryHauling28 = mysqli_query($connect, "SELECT * FROM hauling28");
+                            if (!$queryHauling28) {
+                                echo "Error: " . mysqli_error($connect);
+                            }
+
+                            // Calculate total rows for each table
+                            $currentTotalHauling42 = mysqli_num_rows($queryHauling42);
+                            $currentTotalHauling28 = mysqli_num_rows($queryHauling28);
+
+                            // Calculate the overall total
+                            $overallTotal = $currentTotalHauling42 + $currentTotalHauling28;
+                            ?>
+
+                            <?php
+                            echo "<div>Total Kayu: $overallTotal</div>";
+                            ?>
+                                </div>
                             <!-- Card Body -->
-                            <div class="card-body">
-                                <table id="haul" class="table table-bordered display table-hover" style="width:100%" >
-                                    <thead>
-                                        <tr class="text-small">
-                                            <th style="width: center">Stock Kayu Saat Ini
-                                            <?php
-                                    include "../../config/connection.php";
-                                    $query = mysqli_query($connect, "SELECT hauling.total from hauling");
-                                    while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
-                                    {
-                                        ?>                        
-                                            <?php echo $row['total'];?>
-                                        <?php } ?>
-                                        </th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
                             <!-- Card Footer-->
                         </div>
                     </div>
+                    <div class="row mt-3">
+                    <div class="col-md col-sm col-xs-12">
+                        <div class="ml-auto mr-auto" style="width: fit-content;">
+                            <b><a href="28/index28.php" class="btn btn-outline-secondary p-5" style="width: 300px;">NonBatang</a>
+                            <a href="42/index42.php" class="btn btn-outline-secondary p-5" style="width: 300px;">Batang</a></b>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            
+
         </footer>
     </div>
-    
+
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="../../assets/styles/Jquery3/jquery-3.7.1.js"></script>
@@ -229,4 +223,5 @@
     <!-- ChartJS -->
     <script src="../../assets/styles/ChartJs/auto/auto.js"></script>
 </body>
+
 </html>

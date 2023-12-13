@@ -9,7 +9,7 @@ $NPWP=$_POST['NPWP'];
 $NoRekening=$_POST['NoRekening'];
 $Jenis_Pekerjaan=$_POST['Jenis_Pekerjaan'];
 $NoPetak=$_POST['NoPetak'];
-$Jenis_Kayu=$_POST['Jenis_Kayu'];
+$Jenis_Tanaman=$_POST['Jenis_Tanaman'];
 $Nama_Operator=$_POST['Nama_Operator'];
 $NoAlat_Angkut=$_POST['NoAlat_Angkut'];
 $Sortimen_Kayu = isset($_POST['Sortimen_Kayu']) ? json_encode($_POST['Sortimen_Kayu']) : null;
@@ -18,7 +18,7 @@ $NoSPK=$_POST['NoSPK'];
 $Tanggal_Berlaku=$_POST['Tanggal_Berlaku'];
 $Tanggal_Berakhir=$_POST['Tanggal_Berakhir'];
 
-$query=mysqli_query($connect, "INSERT INTO rekanan VALUES ('','$Nama_Kontraktor','$Jenis_Badan_Usaha','$Nama_Direktur','$Alamat','$NPWP','$NoRekening','$Jenis_Pekerjaan','$NoPetak','$Jenis_Kayu','$Nama_Operator','$NoAlat_Angkut','$Sortimen_Kayu','$NoPBPH','$NoSPK','$Tanggal_Berlaku','$Tanggal_Berakhir')");
+$query=mysqli_query($connect, "INSERT INTO rekanan VALUES ('','$Nama_Kontraktor','$Jenis_Badan_Usaha','$Nama_Direktur','$Alamat','$NPWP','$NoRekening','$Jenis_Pekerjaan','$NoPetak','$Jenis_Tanaman','$Nama_Operator','$NoAlat_Angkut','$Sortimen_Kayu','$NoPBPH','$NoSPK','$Tanggal_Berlaku','$Tanggal_Berakhir')");
 if ($query)
 	 {
 		echo '<script>

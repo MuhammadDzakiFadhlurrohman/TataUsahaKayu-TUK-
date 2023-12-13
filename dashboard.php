@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 include "config/connection.php";
 if(isset($_SESSION['Username'])==0)
@@ -6,6 +6,7 @@ if(isset($_SESSION['Username'])==0)
   echo '<script>alert("ANDA HARUS LOGIN..!!");window.location.href="login/login.html"</script>';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,7 +78,7 @@ if(isset($_SESSION['Username'])==0)
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="login/login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -90,28 +91,6 @@ if(isset($_SESSION['Username'])==0)
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p><?php echo $_SESSION['Username'];?></p>
-                        <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
-                    </div>
-                </div>
-                <!-- search form -->
-                <form action="javascript:void(0)" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
@@ -154,9 +133,6 @@ if(isset($_SESSION['Username'])==0)
                             <li><a href="tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="laporan/index.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Laporan</b></span></a>
-                    </li>
                 </ul>
             </section>
         <!-- /.sidebar -->
@@ -171,7 +147,7 @@ if(isset($_SESSION['Username'])==0)
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="dashboard.html" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;Home&nbsp;</a></li>
+                    <li><a href="dashboard.php" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;Home&nbsp;</a></li>
                     <li class="active"><span class="font-weight-bolder">&nbsp;Dashboard&nbsp;</span></li>
                 </ol>
             </section>
@@ -193,10 +169,6 @@ if(isset($_SESSION['Username'])==0)
             </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            
-        </footer>
     </div>
     <?php include "config/page.php"; ?>
     <!-- ./wrapper -->

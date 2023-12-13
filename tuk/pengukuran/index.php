@@ -53,19 +53,19 @@
                         <li class="dropdown user user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../assets/images/Avatars/avatar.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
-                                        The User
+                                        User
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../../login/login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -78,33 +78,11 @@
        <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
-                </div>
-            </div>
-            <!-- search form -->
-            <form action="javascript:void(0)" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li>
-                    <a href="../../dashboard.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
+                    <a href="../../dashboard.php"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
                 </li>
                 <li class="treeview">
                     <a href="javascript:void(0)">
@@ -124,7 +102,7 @@
                     <a href="../../rekanan/index.php"><i class="fa fa-handshake-o"></i><span>&nbsp;<b>Rekanan</b></span></a>
                 </li>
                 <li>
-                    <a href="../../rkt/index.php"><i class="fa fa-sticky-note"></i>&nbsp;<b>Rencana Kerja</b></a>
+                    <a href="../../rkt/index.php"><i class="fa fa-sticky-note"></i><span>&nbsp;<b>Rencana Kerja</b></span></a>
                     </a>
                 </li>
                 <li>
@@ -138,12 +116,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
-                        <li class="active"><a href="../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
+                        <li class="active"><a href="../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
+                        <li><a href="../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                     </ul>
-                </li>
-                <li>
-                    <a href="../../laporan/index.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Laporan</b></span></a>
                 </li>
             </ul>
         </section>
@@ -155,12 +130,12 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    <b>Hauling</b>
+                    <b>Pengukuran Category</b>
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;User&nbsp;</a></li>
-                    <li class="active"><span class="font-weight-bolder">&nbsp;Users&nbsp;</span></li>
+                    <li><a href="index.php" class="font-weight-bolder"><i class="fa fa-table"></i>&nbsp;Tata Usaha Kayu&nbsp;</a></li>
+                    <li class="active"><span class="font-weight-bolder">&nbsp;Pengukuran&nbsp;</span></li>
                 </ol>
             </section>
         
@@ -171,39 +146,67 @@
                     <div class="col-md col-sm col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline">Hauling</h4>
-                                <span class="float-right"><a class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
+                                <h4 class="card-title d-inline">Pengukuran</h4>
+                                <?php
+                            include "../../config/connection.php";
+
+                            // Retrieve data from the pengukuran42 table
+                            $queryPengukuran42 = mysqli_query($connect, "SELECT * FROM pengukuran42");
+                            if (!$queryPengukuran42) {
+                                echo "Error: " . mysqli_error($connect);
+                            }
+
+                            // Retrieve data from the pengukuran28 table
+                            $queryPengukuran28 = mysqli_query($connect, "SELECT * FROM pengukuran28");
+                            if (!$queryPengukuran28) {
+                                echo "Error: " . mysqli_error($connect);
+                            }
+
+                            // Calculate total rows for each table
+                            $currentTotalPengukuran42 = mysqli_num_rows($queryPengukuran42);
+                            $currentTotalPengukuran28 = mysqli_num_rows($queryPengukuran28);
+
+                            // Calculate the overall total
+                            $overallTotal = $currentTotalPengukuran42 + $currentTotalPengukuran28;
+
+                            // total m3 non batang
+                            $totalm328 = mysqli_query($connect, "SELECT SUM(m3) AS totalm328 FROM pengukuran28");
+                            $totalm328 = mysqli_fetch_assoc($totalm328);
+                            $totalm328 = $totalm328['totalm328'];
+
+                            // total m3 batang
+                            $totalm342 = mysqli_query($connect, "SELECT SUM(m3) AS totalm342 FROM pengukuran42");
+                            $totalm342 = mysqli_fetch_assoc($totalm342);
+                            $totalm342 = $totalm342['totalm342'];
+
+                            // total m3
+                            $totalm3 = $totalm328 + $totalm342;
+
+                            ?>
+
+                            <?php
+                            echo "<div>Total Kayu: $overallTotal</div>";
+                            echo "<div>Total M3: $totalm3</div>";
+                            ?>
                             </div> 
                             <!-- Card Body -->
-                            <div class="card-body">
-                                <table id="haul" class="table table-bordered display table-hover" style="width:100%" >
-                                    <thead>
-                                        <tr class="text-small">
-                                            <th style="width: center">Stock Kayu Saat Ini
-                                            <?php
-                                    include "../../config/connection.php";
-                                    $query = mysqli_query($connect, "SELECT hauling.total from hauling");
-                                    while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
-                                    {
-                                        ?>                        
-                                            <?php echo $row['total'];?>
-                                        <?php } ?>
-                                        </th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                            </div> 
                             <!-- Card Footer-->
                         </div>
                     </div>
+                    <div class="row mt-3">
+                    <div class="col-md col-sm col-xs-12">
+                        <div class="ml-auto mr-auto" style="width: fit-content;">
+                            <b><a href="28/index28.php" class="btn btn-outline-secondary p-5" style="width: 300px;">NonBatang</a>
+                            <a href="42/index42.php" class="btn btn-outline-secondary p-5" style="width: 300px;">Batang</a></b>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            
-        </footer>
     </div>
     
     <!-- ./wrapper -->

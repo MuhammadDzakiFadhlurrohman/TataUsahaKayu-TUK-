@@ -13,3 +13,5 @@ else
 	echo '<script> alert("Data Gagal Dihapus");
 	window.location.href="index42.php"</script>';
 }
+
+?>

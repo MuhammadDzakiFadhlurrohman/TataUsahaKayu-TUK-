@@ -31,7 +31,7 @@
         <!-- Top header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="../../dashboard.html" class="logo" style="height: 54px;">
+            <a href="../../../dashboard.html" class="logo" style="height: 54px;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">
                     <img src="../../../assets/images/logos/Medco papua.png" alt="">
@@ -53,19 +53,19 @@
                         <li class="dropdown user user-menu">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../../assets/images/Avatars/avatar.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
-                                        The User
+                                        User
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../../../login/login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -78,33 +78,11 @@
        <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../../assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i>&nbsp;Online</a>
-                </div>
-            </div>
-            <!-- search form -->
-            <form action="javascript:void(0)" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li>
-                    <a href="../../../dashboard.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
+                    <a href="../../../dashboard.php"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Dashboard</b></span></a>
                 </li>
                 <li class="treeview">
                     <a href="javascript:void(0)">
@@ -124,7 +102,7 @@
                     <a href="../../../rekanan/index.php"><i class="fa fa-handshake-o"></i><span>&nbsp;<b>Rekanan</b></span></a>
                 </li>
                 <li>
-                    <a href="../../../rkt/index.php"><i class="fa fa-sticky-note"></i>&nbsp;<b>Rencana Kerja</b></a>
+                    <a href="../../../rkt/index.php"><i class="fa fa-sticky-note"></i><span>&nbsp;<b>Rencana Kerja</b></span></a>
                     </a>
                 </li>
                 <li>
@@ -138,12 +116,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="../../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
-                        <li><a href="../../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
+                        <li class="active"><a href="../index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
+                        <li><a href="../../hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                     </ul>
-                </li>
-                <li>
-                    <a href="../../../laporan/index.html"><i class="fa fa-dashboard"></i><span>&nbsp;<b>Laporan</b></span></a>
                 </li>
             </ul>
         </section>
@@ -159,7 +134,7 @@
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
-                    <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-book"></i>&nbsp;Tata Usaha Kayu&nbsp;</a></li>
+                    <li><a href="../index.php" class="font-weight-bolder"><i class="fa fa-book"></i>&nbsp;Tata Usaha Kayu&nbsp;</a></li>
                     <li class="active"><span class="font-weight-bolder">&nbsp;Pengukuran&nbsp;</span></li>
                 </ol>
             </section>
@@ -171,7 +146,7 @@
                     <div class="col-md col-sm col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline">List Pengukuran</h4>
+                                <h4 class="card-title d-inline">List Pengukuran Batang</h4>
                                 <span class="float-right"><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
                                 <div>
                                 <?php
@@ -188,10 +163,21 @@
                                 $currentTotal = $currentTotalRow['total'];
                                 // Increment the current total by 1
                                 $newTotal = $currentTotal ;
+
+                                //Total m3
+                                $totalm3 = mysqli_query($connect, "SELECT SUM(m3) AS totalm3 FROM pengukuran42");
+                                $totalm3 = mysqli_fetch_assoc($totalm3);
+                                $totalm3 = $totalm3['totalm3'];
+                                
                                 ?>
                                 <?php
-                                echo "<div>Total: $newTotal</div>";
+                                echo "<div>Total Kayu: $newTotal</div>";
+                                echo "<div>Total m3: $totalm3</div>";
                                 ?>
+                                <div>
+                                    <br>
+                                    <a href="download.php?file=Pengukuran 4.2.xlsx" class="btn btn-success btn-sm" role="button" title="Download File"><i class="fa fa-download"></i> Download File</a>
+                                </div>
                                 </div>
                             </div> 
                             <!-- Card Body -->
@@ -226,23 +212,22 @@
                                         <tr class="text-center text-small">
                                             <td><?php echo $no = $no+1;?></td>
                                             <td><?php echo $row['NoPetak'];?></td>
-                                            <td><?php echo $row['Kontraktor_Harvesting'];?></td>
+                                            <td><?php echo $row['Nama_Kontraktor'];?></td>
                                             <td><?php echo $row['NoSPK_Harvesting'];?></td>
                                             <td><?php echo $row['Tanggal_Ukur'];?></td>
-                                            <td><?php echo $row['Jenis_Tanaman'];?></td>
+                                            <td><?php echo $row['Jenis_Kayu'];?></td>
                                             <td><?php echo $row['Sortimen_Kayu'];?></td>
                                             <td><?php echo $row['NoBatang'];?></td>
                                             <td><?php echo $row['Diameter'];?></td>
                                             <td><?php echo $row['Panjang'];?></td>
                                             <td><?php echo $row['m3'];?></td>
-                                            <td><?php echo $row['Nama_Scaller'];?></td>
+                                            <td><?php echo $row['Nama_Scaler'];?></td>
                                             <td><?php echo $row['Nama_Pengawas'];?></td>
                                             <td>
                                             <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
-                                        </tr> 
                                     </tbody>
                                 </table>
                             </div>
@@ -251,7 +236,8 @@
                     </div>
                 </div>
             </section>
-            <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
+        </div>
+        <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -267,7 +253,8 @@
                                     <div class="col-md-4">No. Petak</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <select id="NoPetak" name="NoPetak" class="form-control" >
+                                    <select id="NoPetak" name="NoPetak" class="form-control" required>
+                                    <option value="">-PILIH NOMOR PETAK-</option>
                                     <?php
                                          include "../../../config/connection.php";
                                         $query = mysqli_query($connect, "SELECT * from rkt");
@@ -282,7 +269,7 @@
                                     <div class="col-md-4">Kontraktor Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Nama_Kontraktor" name="Nama_Kontraktor" class="form-control" >
+                                        <select id="Nama_Kontraktor" name="Nama_Kontraktor" class="form-control" required>
                                             <option value="">Pilih Kontraktor</option>
                                             <?php
                                             include "../../../config/connection.php";
@@ -298,25 +285,25 @@
                                     <div class="col-md-4">SPK Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                       <input type="text" name="NoSPK_Harvesting" class="form-control" >
+                                       <input type="text" name="NoSPK_Harvesting" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Tanggal Ukur</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="date" name="Tanggal_Ukur" class="form-control" placeholder="Tanggal Ukur">
+                                    <input type="date" name="Tanggal_Ukur" class="form-control" placeholder="Tanggal Ukur" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Jenis Kayu</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <select id="Jenis_Tanaman" name="Jenis_Tanaman" class="form-control">
-                                            <option value="">Pilih Jenis Tanaman</option>
-                                            <option value="E. Pelita (HTI)">E. Pelita (HTI)</option>
-                                            <option value="Accasia M. (HTI)">Accasia M. (HTI)</option>
-                                            <option value="Rimba Campuran (MHV)">Rimba Campuran (MHV)</option>
+                                    <select id="Jenis_Kayu" name="Jenis_Kayu" class="form-control" required>
+                                        <option value="">Pilih Jenis Tanaman</option>
+                                            <option value="Eucalyptus">E. Pelita (HTI)</option>
+                                            <option value="Accacia">Accasia M. (HTI)</option>
+                                            <option value="Rimba Campuran">Rimba Campuran (MHV)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -324,56 +311,44 @@
                                     <div class="col-md-4">Sortimen</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="1.0m"> 1.0 m 
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="2.5m"> 2.5 m
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="2.8m"> 2.8 m 
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="4.2m"> 4.2 m
-                                        </label>
+                                    <input type="text" name="Sortimen_Kayu" class="form-control" value="4.2" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">No. Batang</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="NoBatang" class="form-control" >
+                                    <input type="text" name="NoBatang" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Diameter</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="Diameter" class="form-control" >
+                                        <input type="text" name="Diameter" class="form-control" required>
                                     </div>
+                                    <div class="col-md-3">cm</div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">P</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="Panjang" class="form-control" >
+                                    <input type="text" name="Panjang" class="form-control" value="4.2" readonly>
                                     </div>
+                                    <div class="col-md-3">m</div>
                                     </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Nama Scaler</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Nama_Sceller" class="form-control" >
+                                    <input type="text" name="Nama_Scaler" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Nama Pengawas</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Nama_Pengawas" class="form-control" >
+                                    <input type="text" name="Nama_Pengawas" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
