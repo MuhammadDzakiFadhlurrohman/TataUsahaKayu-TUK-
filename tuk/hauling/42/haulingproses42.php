@@ -2,7 +2,7 @@
 include "../../../config/connection.php";
 
 // Retrieve the current total
-$currentTotalQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling");
+$currentTotalQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling42");
 $currentTotalRow = mysqli_fetch_assoc($currentTotalQuery);
 $currentTotal = $currentTotalRow['total'];
 
@@ -32,8 +32,8 @@ $Nama_Pengawas = $_POST['Nama_Pengawas'];
 $lp = 1 / 4 * 22 / 7 * (($Lebar / 100) ** 2);
 $m3 = $lp * $Panjang * 0.6;
 
-// Insert data into hauling table along with updating the total
-$query = mysqli_query($connect, "INSERT INTO hauling (NoPetak, Kontraktor_Harvesting, NoSPK_Harvesting, NoSPK_Hauling, Tanggal_Hauling, Jenis_Kayu, Sortimen, NoTumpukan, NoBatang, Panjang, Lebar, m3, Nama_Operator, NoAlat, Driver, NoTruck, NoTrip_Angkutan, Nama_Sceller, Nama_Pengawas, total) 
+// Insert data into hauling42 table along with updating the total
+$query = mysqli_query($connect, "INSERT INTO hauling42 (NoPetak, Kontraktor_Harvesting, NoSPK_Harvesting, NoSPK_Hauling, Tanggal_Hauling, Jenis_Kayu, Sortimen, NoTumpukan, NoBatang, Panjang, Lebar, m3, Nama_Operator, NoAlat, Driver, NoTruck, NoTrip_Angkutan, Nama_Sceller, Nama_Pengawas, total) 
 VALUES ('$NoPetak', '$Kontraktor_Harvesting', '$NoSPK_Harvesting', '$NoSPK_Hauling', '$Tanggal_Hauling', '$Jenis_Kayu', '$Sortimen', '$NoTumpukan', '$NoBatang', '$Panjang', '$Lebar', '$m3', '$Nama_Operator', '$NoAlat', '$Driver', '$NoTruck', '$NoTrip_Angkutan', '$Nama_Sceller', '$Nama_Pengawas', '$newTotal')");
 
 if ($query) {

@@ -31,7 +31,7 @@
         <!-- Top header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="../../../dashboard.html" class="logo" style="height: 54px;">
+            <a href="../../dashboard.html" class="logo" style="height: 54px;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">
                     <img src="../../../assets/images/logos/Medco papua.png" alt="">
@@ -65,7 +65,7 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="../../../login.html" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="../../login.html" class="btn btn-default btn-flat">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -138,8 +138,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
-                        <li class="active"><a href="../../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
+                        <li class="active"><a href="../../../tuk/pengukuran/index.php"><i class="fa fa-circle-o"></i>&nbsp;Pengukuran</a></li>
+                        <li><a href="../../../tuk/hauling/index.php"><i class="fa fa-circle-o"></i>&nbsp;Hauling</a></li>
                     </ul>
                 </li>
                 <li>
@@ -155,12 +155,12 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    <b>Hauling</b>
+                    <b>Pengukuran</b>
                 </h1>
                 <!-- Breadcrumb navigation -->
                 <ol class="breadcrumb">
                     <li><a href="index.html" class="font-weight-bolder"><i class="fa fa-book"></i>&nbsp;Tata Usaha Kayu&nbsp;</a></li>
-                    <li class="active"><span class="font-weight-bolder">&nbsp;Hauling&nbsp;</span></li>
+                    <li class="active"><span class="font-weight-bolder">&nbsp;Pengukuran&nbsp;</span></li>
                 </ol>
             </section>
         
@@ -171,9 +171,29 @@
                     <div class="col-md col-sm col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline">Kayu 4,2m</h4>
+                                <h4 class="card-title d-inline">List Pengukuran</h4>
                                 <span class="float-right"><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
-                        </div>
+                                <div>
+                                <?php
+                                include "../../../config/connection.php";
+                                // Retrieve data from the hauling table
+                                $query = mysqli_query($connect, "SELECT * FROM pengukuran42");
+                                // Check if the query was successful
+                                if (!$query) {
+                                    echo "Error: " . mysqli_error($connect);
+                                }
+                                // Fetch the total directly from the database using SQL
+                                $currentTotalQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM pengukuran42");
+                                $currentTotalRow = mysqli_fetch_assoc($currentTotalQuery);
+                                $currentTotal = $currentTotalRow['total'];
+                                // Increment the current total by 1
+                                $newTotal = $currentTotal ;
+                                ?>
+                                <?php
+                                echo "<div>Total: $newTotal</div>";
+                                ?>
+                                </div>
+                            </div> 
                             <!-- Card Body -->
                             <div class="card-body">
                                 <table id="UserList" class="table table-bordered display table-hover table-responsive" style="width:100%" >
@@ -187,9 +207,9 @@
                                             <th style="max-width: 70px">Jenis</th>
                                             <th style="max-width: 200px">Sortimen</th>
                                             <th style="max-width: 100px">No. Batang</th>
-                                            <th style="max-width: 70px">P</th>
                                             <th style="max-width: 150px">Diameter</th>
-                                            <th style="max-width: 70px">M3</th>
+                                            <th style="max-width: 70px">P</th>
+                                            <th style="max-width: 70px">m3</th>
                                             <th style="max-width: 100px">Scaler</th>
                                             <th style="max-width: 100px">Pengawas</th>
                                             <th>Action</th>
@@ -199,7 +219,7 @@
                                     <?php
                                     include "../../../config/connection.php";
                                     $no = 0;
-                                    $query = mysqli_query($connect, "SELECT * from pengukuran_kayu");
+                                    $query = mysqli_query($connect, "SELECT * from pengukuran42");
                                     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
                                     {
                                         ?>
@@ -212,16 +232,17 @@
                                             <td><?php echo $row['Jenis_Tanaman'];?></td>
                                             <td><?php echo $row['Sortimen_Kayu'];?></td>
                                             <td><?php echo $row['NoBatang'];?></td>
-                                            <td><?php echo $row['Panjang'];?></td>
                                             <td><?php echo $row['Diameter'];?></td>
-                                            <td><?php echo $row['M3'];?></td>
+                                            <td><?php echo $row['Panjang'];?></td>
+                                            <td><?php echo $row['m3'];?></td>
                                             <td><?php echo $row['Nama_Scaller'];?></td>
                                             <td><?php echo $row['Nama_Pengawas'];?></td>
-                                            <td> 
+                                            <td>
                                             <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
-                                        <?php } ?> 
+                                        <?php } ?>
+                                        </tr> 
                                     </tbody>
                                 </table>
                             </div>
@@ -230,16 +251,11 @@
                     </div>
                 </div>
             </section>
-        </div>
-         <footer class="main-footer">
-            
-        </footer>
-        <!-- Modal Input -->
-        <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
+            <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">New Hauling Record</h5>
+                        <h5 class="modal-title">New Partner Record</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -275,7 +291,7 @@
                                             echo '<option value="' . $row['Nama_Kontraktor'] . '">' . $row['Nama_Kontraktor'] . '</option>';
                                             }
                                             ?>   
-                                        </select>
+                                            </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -333,19 +349,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">P</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input type="text" name="Panjang" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <div class="col-md-4">Diameter</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
                                         <input type="text" name="Diameter" class="form-control" >
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4">P</div>
+                                    <div class="col-md-1">:</div>
+                                    <div class="col-md">
+                                        <input type="text" name="Panjang" class="form-control" >
+                                    </div>
+                                    </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Nama Scaler</div>
                                     <div class="col-md-1">:</div>
@@ -368,7 +384,8 @@
                         </form>
                     </div>
                 </div>
-            </div>
+                </div>
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -376,25 +393,25 @@
     
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
-    <script src="../../../../assets/styles/Jquery3/jquery-3.7.1.js"></script>
+    <script src="../../../assets/styles/Jquery3/jquery-3.7.1.js"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="../../../../assets/styles/bootstrap_v4/js/bootstrap.js"></script>
+    <script src="../../../assets/styles/bootstrap_v4/js/bootstrap.js"></script>
     <!-- FastClick -->
-    <script src="../../../../assets/styles/fastclick/lib/fastclick.js"></script>
+    <script src="../../../assets/styles/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../../../assets/dist/js/adminlte.js"></script>
+    <script src="../../../assets/dist/js/adminlte.js"></script>
     <!-- Data Table-->
-    <script src="../../../../assets/styles/DataTables/datatables.js"></script>
+    <script src="../../../assets/styles/DataTables/datatables.js"></script>
     <script>
         new DataTable('#UserList');
     </script>
     <!-- Sparkline -->
-    <script src="../../../../assets/styles/jquery-sparkline/dist/jquery.sparkline.js"></script>
+    <script src="../../../assets/styles/jquery-sparkline/dist/jquery.sparkline.js"></script>
     <!-- jvectormap  -->
-    <script src="../../../../assets/styles/jvectormap/jquery-jvectormap.js"></script>
+    <script src="../../../assets/styles/jvectormap/jquery-jvectormap.js"></script>
     <!-- SlimScroll -->
-    <script src="../../../../assets/styles/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="../../../assets/styles/jquery-slimscroll/jquery.slimscroll.js"></script>
     <!-- ChartJS -->
-    <script src="../../../../assets/styles/ChartJs/auto/auto.js"></script>
+    <script src="../../../assets/styles/ChartJs/auto/auto.js"></script>
 </body>
 </html>

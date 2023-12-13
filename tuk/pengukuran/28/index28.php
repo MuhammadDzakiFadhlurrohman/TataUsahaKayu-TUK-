@@ -187,11 +187,10 @@
                                             <th style="max-width: 70px">Jenis</th>
                                             <th style="max-width: 200px">Sortimen</th>
                                             <th style="max-width: 150px">Tumpukan</th>
-                                            <th style="max-width: 100px">No. Batang</th>
-                                            <th style="max-width: 150px">Diameter</th>
                                             <th style="max-width: 70px">P</th>
                                             <th style="max-width: 70px">L</th>
                                             <th style="max-width: 70px">T</th>
+                                            <th style="max-width: 70px">m3</th>
                                             <th style="max-width: 100px">Scaler</th>
                                             <th style="max-width: 100px">Pengawas</th>
                                             <th>Action</th>
@@ -214,17 +213,14 @@
                                             <td><?php echo $row['Jenis_Tanaman'];?></td>
                                             <td><?php echo $row['Sortimen_Kayu'];?></td>
                                             <td><?php echo $row['NoTumpukan'];?></td>
-                                            <td><?php echo $row['NoBatang'];?></td>
-                                            <td><?php echo $row['Diameter'];?></td>
                                             <td><?php echo $row['Panjang'];?></td>
                                             <td><?php echo $row['Lebar'];?></td>
                                             <td><?php echo $row['Tinggi'];?></td>
+                                            <td><?php echo $row['m3'];?></td>
                                             <td><?php echo $row['Nama_Scaller'];?></td>
                                             <td><?php echo $row['Nama_Pengawas'];?></td>
                                             <td>
-                                            <div class="d-inline"><a id="0" href="javascript:void(0)" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" onclick="editFun(0)"><i class="fa fa-pencil"></i></a></div>
-                                                <div class="d-inline" ><a href="javascript:void(0)" onclick="event.preventDefault(0);document.remove()" class="btn btn-danger"><i class="fa fa-trash"></i></a></div>
-                                                <form id="usr-del-1" action="javascript:void(0)"></form>
+                                            <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -321,10 +317,6 @@
                                         <label>
                                             <input type="radio" name="Sortimen_Kayu" value="2.8m"> 2.8 m 
                                         </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="Sortimen_Kayu" value="4.2m"> 4.2 m
-                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -332,20 +324,6 @@
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
                                     <input type="text" name="NoTumpukan" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">No. Batang</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="NoBatang" class="form-control" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Diameter</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input type="text" name="Diameter" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="form-group row">

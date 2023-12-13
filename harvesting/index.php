@@ -211,9 +211,7 @@ include "../config/connection.php";
                                             <td><?php echo $row['NoSPK'];?></td>
                                             <td><?php echo $row['Luasan_Tebangan'];?></td>
                                             <td>
-                                            <div class="d-inline"><a id="0" href="javascript:void(0)" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" onclick="editFun(0)"><i class="fa fa-pencil"></i></a></div>
-                                                <div class="d-inline" ><a href="javascript:void(0)" onclick="event.preventDefault(0);document.remove()" class="btn btn-danger"><i class="fa fa-trash"></i></a></div>
-                                                <form id="usr-del-1" action="javascript:void(0)"></form>
+                                            <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -338,97 +336,7 @@ include "../config/connection.php";
                 </div>
             </div>
         </div>
-        <!-- Modal Edit -->
-        <div id="EditModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Harvesting Record</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="InputForm" action="javascript:void(0)" method="post">
-                            <div class="container">
-                                <div class="form-group row">
-                                    <div class="col-md-4">No. Petak</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <?php
-                                         include "../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from rkt");
-                                        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Luasan Petak</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input name="luasan_petak" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Jenis Tanaman</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input name="jenis_tanaman" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Tanggal Tanam</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input name="tanggal_tanam" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Kontraktor Harvesting</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <select id="Kontraktor_harvesting" name="Kontraktor_harvesting" class="form-control">
-                                            <option value="">Pilih Kontraktor</option>
-                                            <option value="PT. Tirta Jaya Makmur">PT. Tirta Jaya Makmur</option>
-                                            <option value="CV. Citra Maju Mandiri">CV. Citra Maju Mandiri</option>
-                                            <option value="CV. Sinar Jaya Papua">CV. Sinar Jaya Papua</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">No. SPK</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <select id="no_spk" name="no_spk" class="form-control">
-                                            <option value="">Pilih No.SPK</option>
-                                            <option value="009">009</option>
-                                            <option value="010">010</option>
-                                            <option value="011">011</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Luasan Tebangan</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        <input type="text" name="luasan_tebangan" class="form-control" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-            </section>
             <!-- /.content -->
-        </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             

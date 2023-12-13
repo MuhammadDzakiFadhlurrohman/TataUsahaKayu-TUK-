@@ -200,9 +200,7 @@
                                             <td><?php echo $row['NIK_Sceller'];?></td>
                                             <td><?php echo $row['Nama_Sceller'];?></td>
                                             <td>
-                                            <div class="d-inline"><a id="0" href="javascript:void(0)" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" onclick="editFun(0)"><i class="fa fa-pencil"></i></a></div>
-                                                <div class="d-inline" ><a href="javascript:void(0)" onclick="event.preventDefault(0);document.remove()" class="btn btn-danger"><i class="fa fa-trash"></i></a></div>
-                                                <form id="usr-del-1" action="javascript:void(0)"></form>
+                                            <a href="h.php?id=<?=$row['No_Pengukuran'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
