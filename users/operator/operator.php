@@ -216,21 +216,21 @@
                                             <div class="col-md-4">No Alat</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="No_Alat" class="form-control" placeholder="No Alat" data-validate="text is required">
+                                                <input type="text" name="No_Alat" class="form-control" placeholder="No Alat" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-4">NIK</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="NIK_Operator" class="form-control" placeholder="NIK" data-validate="text is required">
+                                                <input type="text" name="NIK_Operator" class="form-control" placeholder="NIK" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-4">Nama</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="Nama_Scaler" class="form-control" placeholder="Nama" data-validate="text is required">
+                                                <input type="text" name="Nama_Scaler" class="form-control" placeholder="Nama" required>
                                             </div>
                                         </div>
                             <div class="modal-footer">

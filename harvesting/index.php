@@ -259,7 +259,7 @@ include "../config/connection.php";
                                         <option value="">-PILIH KONTRAKTOR HARVESTING-</option>
                                         <?php
                                          include "../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from rekanan");
+                                        $query = mysqli_query($connect, "SELECT * from rekanan WHERE Jenis_Pekerjaan = 'HR'");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                         echo '<option value="' . $row['Nama_Kontraktor'] . '">' . $row['Nama_Kontraktor'] . '</option>';
                                         }

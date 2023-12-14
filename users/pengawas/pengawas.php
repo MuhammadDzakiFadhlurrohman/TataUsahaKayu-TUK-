@@ -205,7 +205,7 @@
                                             <div class="col-md-4">Jenis Pengawas</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <select id="Jenis_Pengawas" name="Jenis_Pengawas" class="form-control" >
+                                                <select id="Jenis_Pengawas" name="Jenis_Pengawas" class="form-control" required>
                                                 <option value="">Pilih Jenis Pengawas</option>
                                                 <option value="HARVESTING">HARVESTING</option>
                                                 <option value="HAULING">HAULING</option>
@@ -217,14 +217,14 @@
                                             <div class="col-md-4">NIK</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="NIK_Pengawas" class="form-control" placeholder="NIK" data-validate="text is required">
+                                                <input type="text" name="NIK_Pengawas" class="form-control" placeholder="NIK" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-4">Nama</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="Nama_Pengawas" class="form-control" placeholder="Nama" data-validate="text is required">
+                                                <input type="text" name="Nama_Pengawas" class="form-control" placeholder="Nama" required>
                                             </div>
                                         </div>
                             <div class="modal-footer">

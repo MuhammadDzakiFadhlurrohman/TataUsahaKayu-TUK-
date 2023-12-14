@@ -224,11 +224,11 @@
                                     <div class="col-md-4">Jenis Tanaman</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Jenis_Tanaman" name="Jenis_Tanaman" class="form-control" required>
+                                        <select id="Jenis_Tanaman" name="Jenis_Tanaman" class="form-control" onchange="rc()" required>
                                             <option value="">Pilih Jenis Tanaman</option>
                                             <option value="Eucalyptus">E. Pelita (HTI)</option>
                                             <option value="Accacia">Accasia M. (HTI)</option>
-                                            <option value="Rimba Campuran">Rimba Campuran (MHV)</option>
+                                            <option value="RimbaCampuran">Rimba Campuran (MHV)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -258,6 +258,24 @@
                                         </select>
                                     </div>
                                 </div>
+                                <script>
+                                function rc() {
+                                    var jenisTanaman = document.getElementById('Jenis_Tanaman').value;
+                                    var jarakTanam = document.getElementById('Jarak_Tanam');
+                                    jarakTanam.disabled = false;
+
+                                    if (jenisTanaman === 'RimbaCampuran') {
+                                        // Jika jenis pekerjaan adalah "Harvesting", nonaktifkan atau kosongkan NoPetak, nama driver, dan alat angkut
+                                        
+                                        jarakTanam.disabled = true;
+                                        jarakTanam.value = '';
+                                    } else {
+                                        jarakTanam.disabled = false;
+                                        jarakTanam.value = '';
+                                    }
+                                    
+                                }
+                                </script>
                                 <div class="modal-footer">
                                 <input type="submit" name="save" class="btn btn-primary">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

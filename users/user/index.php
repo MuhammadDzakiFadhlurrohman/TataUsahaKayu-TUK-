@@ -207,28 +207,28 @@
                                             <div class="col-md-4">NIK</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="NIK" class="form-control" placeholder="NIK" data-validate="text is required">
+                                                <input type="text" name="NIK" class="form-control" placeholder="NIK" maxlength="6" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-4">Username</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="Username" class="form-control" placeholder="Username" data-validate="text is required">
+                                                <input type="text" name="Username" class="form-control" placeholder="Username" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-4">Password</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="password" name="User_Password" class="form-control" placeholder="Password" data-validate="text is required">
+                                                <input type="password" name="User_Password" class="form-control" placeholder="Password" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-4">Jabatan</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <select name="Jabatan" class="form-control">
+                                                <select name="Jabatan" class="form-control" required>
                                                     <option value="Staff">Staff</option>
                                                     <option value="Manager">Manager</option>
                                                 </select>
