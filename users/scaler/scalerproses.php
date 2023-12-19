@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../../config/connection.php";
 
 $Jenis_Scaler=$_POST['Jenis_Scaler'];

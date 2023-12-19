@@ -1,5 +1,7 @@
 <?php
+session_start();
 include "../config/connection.php";
+
 
 $NoPetak=$_POST['NoPetak'];
 $Luasan_Petak=$_POST['Luasan_Petak'];

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../config/connection.php";
 
 $Nama_Kontraktor=$_POST['Nama_Kontraktor'];

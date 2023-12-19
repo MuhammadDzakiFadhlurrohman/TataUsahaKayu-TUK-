@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../../../config/connection.php";
 
 $currentTotalQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling28");

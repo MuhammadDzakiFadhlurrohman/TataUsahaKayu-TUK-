@@ -1,11 +1,16 @@
 <?php
+session_start();
 include "../../config/connection.php";
 
 $Username=$_POST['Username'];
 $User_Password=md5($_POST['User_Password']);
 $NIK=$_POST['NIK'];
 $Jabatan=$_POST['Jabatan'];
-$Otoritas=$_POST['Otorisasi'];
+$Otorisasi=$Jabatan;
+
+if ($Jabatan =='manager') {
+	$Otorisasi = 'admin';
+}
 
 $search=mysqli_query($connect, "SELECT * FROM user WHERE NIK='$NIK' OR Username='$Username'");
 if(mysqli_num_rows($search) >= 1)
@@ -18,7 +23,7 @@ if(mysqli_num_rows($search) >= 1)
 }
 else
 {
-	$query = mysqli_query($connect,"INSERT INTO user VALUES ('$Username','$User_Password','$NIK','$Jabatan','2')");
+	$query = mysqli_query($connect,"INSERT INTO user VALUES ('$Username','$User_Password','$NIK','$Jabatan','$Otorisasi')");
 	if ($query)
 	 {
 		echo '<script>

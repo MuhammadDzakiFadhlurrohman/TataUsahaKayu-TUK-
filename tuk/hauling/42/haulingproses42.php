@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../../../config/connection.php";
 
 // Retrieve the current total

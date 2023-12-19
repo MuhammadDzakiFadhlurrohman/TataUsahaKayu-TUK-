@@ -14,7 +14,7 @@
                     $_SESSION['Username'] = $row['Username'];
                     $_SESSION['NIK'] = $row['NIK'];
                     $_SESSION['Jabatan'] = $row['Jabatan'];
-                    $_SESSION['Otoritas'] = $row['Otoritas'];
+                    $_SESSION['Otorisasi'] = $row['Otorisasi'];
                     ?>
                     <script>
 		            alert("SELAMAT DATANG <?= $row['Username'];?> ANDA TELAH LOGIN");

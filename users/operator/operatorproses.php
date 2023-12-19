@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../../config/connection.php";
 
 $Nama_Alat=$_POST['Nama_Alat'];
