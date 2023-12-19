@@ -165,7 +165,7 @@ include "../../../assets/sidebar/tuk/pengukuran/42.php";
                                         <tr class="text-center text-small">
                                             <td><?php echo $no = $no+1;?></td>
                                             <td><?php echo $row['NoPetak'];?></td>
-                                            <td><?php echo $row['Nama_Kontraktor'];?></td>
+                                            <td><?php echo $row['Kontraktor_Harvesting'];?></td>
                                             <td><?php echo $row['NoSPK_Harvesting'];?></td>
                                             <td><?php echo $row['Tanggal_Ukur'];?></td>
                                             <td><?php echo $row['Jenis_Kayu'];?></td>
@@ -194,7 +194,7 @@ include "../../../assets/sidebar/tuk/pengukuran/42.php";
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">New Partner Record</h5>
+                        <h5 class="modal-title">New Measurement Record</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -209,7 +209,7 @@ include "../../../assets/sidebar/tuk/pengukuran/42.php";
                                     <select id="NoPetak" name="NoPetak" class="form-control" required>
                                     <option value="">-PILIH NOMOR PETAK-</option>
                                     <?php
-                                        $query = mysqli_query($connect, "SELECT * from rkt");
+                                        $query = mysqli_query($connect, "SELECT * from harvesting");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                         echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
                                         }
@@ -221,12 +221,12 @@ include "../../../assets/sidebar/tuk/pengukuran/42.php";
                                     <div class="col-md-4">Kontraktor Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Nama_Kontraktor" name="Nama_Kontraktor" class="form-control" required>
+                                        <select id="Kontraktor_Harvesting" name="Kontraktor_Harvesting" class="form-control" required>
                                             <option value="">Pilih Kontraktor</option>
                                             <?php
-                                            $query = mysqli_query($connect, "SELECT * from rekanan WHERE Jenis_Pekerjaan = 'HR'");
+                                            $query = mysqli_query($connect, "SELECT * from harvesting WHERE NoPetak = '$NoPetak'");
                                             while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                            echo '<option value="' . $row['Nama_Kontraktor'] . '">' . $row['Nama_Kontraktor'] . '</option>';
+                                            echo '<option value="' . $row['Kontraktor_Harvesting'] . '">' . $row['Kontraktor_Harvesting'] . '</option>';
                                             }
                                             ?>   
                                             </select>
