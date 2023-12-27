@@ -16,33 +16,26 @@ $Kontraktor_Hauling=$_POST['Kontraktor_Hauling'];
 $NoSPK_Hauling=$_POST['NoSPK_Hauling'];
 $Tanggal_Hauling=$_POST['Tanggal_Hauling'];
 $Jenis_Kayu=$_POST['Jenis_Kayu'];
-$Sortimen=$_POST['Sortimen'];
+$Sortimen_Kayu=$_POST['Sortimen_Kayu'];
 $NoTumpukan=$_POST['NoTumpukan'];
-$Panjang=$_POST['Panjang'];
-$Lebar=$_POST['Lebar'];
-$Tinggi=$_POST['Tinggi'];
 $Nama_Operator=$_POST['Nama_Operator'];
-$NoAlat=$_POST['NoAlat'];
-$Driver=$_POST['Driver'];
-$NoTruck=$_POST['NoTruck'];
+$No_Alat=$_POST['No_Alat'];
+$Nama_Driver=$_POST['Nama_Driver'];
+$NoAlat_Angkut=$_POST['NoAlat_Angkut'];
 $NoTrip_Angkutan=$_POST['NoTrip_Angkutan'];
 $Nama_Scaler=$_POST['Nama_Scaler'];
 $Nama_Pengawas=$_POST['Nama_Pengawas'];
 
-// Menentukan faktor pengali berdasarkan jenis tanaman
-$faktorPengali = 1.0; // Nilai default jika tidak ada faktor khusus
-if ($Jenis_Kayu === 'Eucalyptus') {
-    $faktorPengali = 0.67;
-} elseif ($Jenis_Kayu === 'Accacia') {
-    $faktorPengali = 0.59;
-}
-elseif ($Jenis_Kayu === ' Rimba Campuran') {
-    $faktorPengali = 0.63;
-}
-
-$m3=$Panjang*$Lebar*$Tinggi*$faktorPengali;
-
-$query=mysqli_query($connect, "INSERT INTO hauling28 VALUES ('','$NoPetak','$Kontraktor_Harvesting', '$NoSPK_Haversting', '$Kontraktor_Hauling', '$NoSPK_Hauling', '$Tanggal_Hauling', '$Jenis_Kayu', '$Sortimen', '$NoTumpukan', '$Panjang', '$Lebar', '$Tinggi', '$m3', '$Nama_Operator', '$NoAlat', '$Driver', '$NoTruck', '$NoTrip_Angkutan', '$Nama_Scaler', '$Nama_Pengawas', $newTotal)");
+// Cek apakah nilai NoPetak sudah ada di database
+$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM harvesting WHERE NoPetak='$NoPetak'");
+if (mysqli_num_rows($cekNoPetak)>0) {
+// Nilai NoPetak sudah ada
+echo '<script>
+alert("No. Petak Sudah Diinput Silahkan Input No. Petak Lainnya");
+window.location.href="index.php"
+</script>';
+} else {
+$query=mysqli_query($connect, "INSERT INTO hauling28 VALUES ('','$NoPetak','$Kontraktor_Harvesting', '$NoSPK_Haversting', '$Kontraktor_Hauling', '$NoSPK_Hauling', '$Tanggal_Hauling', '$Jenis_Kayu', '$Sortimen_Kayu', '$NoTumpukan', '$Nama_Operator', '$No_Alat', '$Nama_Driver', '$NoAlat_Angkut', '$NoTrip_Angkutan', '$Nama_Scaler', '$Nama_Pengawas', $newTotal)");
 if ($query) {
     echo '<script>
         alert("Data Berhasil Disimpan. Total Data: ' . $newTotal + 1 . '");
@@ -53,5 +46,6 @@ if ($query) {
         alert("Data Gagal Disimpan");
         window.location.href="index28.php"
     </script>';
+}
 }
 ?>

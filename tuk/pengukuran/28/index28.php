@@ -119,7 +119,7 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                 // M3
                                 $totalm3 = mysqli_query($connect, "SELECT SUM(m3) AS totalm3 FROM pengukuran28");
                                 $totalm3 = mysqli_fetch_assoc($totalm3);
-                                $totalm3 = $totalm3['totalm3'];
+                                $totalm3 = format_angka($totalm3['totalm3']);
                                 ?>
                                 <?php
                                 echo "<div>Total Kayu: $newTotal</div>";
@@ -155,6 +155,9 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                     <tbody>
                                     <?php
                                     $no = 0;
+                                    function format_angka($angka) {
+                                        return number_format($angka, 2);
+                                      }
                                     $query = mysqli_query($connect, "SELECT * from pengukuran28");
                                     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) 
                                     {
@@ -162,7 +165,7 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                         <tr class="text-center text-small">
                                             <td><?php echo $no = $no+1;?></td>
                                             <td><?php echo $row['NoPetak'];?></td>
-                                            <td><?php echo $row['Nama_Kontraktor'];?></td>
+                                            <td><?php echo $row['Kontraktor_Harvesting'];?></td>
                                             <td><?php echo $row['NoSPK_Harvesting'];?></td>
                                             <td><?php echo $row['Tanggal_Ukur'];?></td>
                                             <td><?php echo $row['Jenis_Kayu'];?></td>
@@ -171,7 +174,7 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                             <td><?php echo $row['Panjang'];?></td>
                                             <td><?php echo $row['Lebar'];?></td>
                                             <td><?php echo $row['Tinggi'];?></td>
-                                            <td><?php echo $row['m3'];?></td>
+                                            <td><?php echo format_angka($row['m3']);?></td>
                                             <td><?php echo $row['Nama_Scaler'];?></td>
                                             <td><?php echo $row['Nama_Pengawas'];?></td>
                                             <td>
@@ -203,31 +206,79 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                     <div class="col-md-4">No. Petak</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <select id="NoPetak" name="NoPetak" class="form-control" required>
-                                    <option value="">-PILIH NOMOR PETAK-</option>
-                                    <?php
-                                        $query = mysqli_query($connect, "SELECT * from harvesting");
-                                        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
-                                        }
-                                        ?>   
-                                    </select>
+                                        <select id="NoPetak" name="NoPetak" class="form-control" required onchange="pengukuran42()">
+                                            <option value="">-PILIH NOMOR PETAK-</option>
+                                            <?php
+                                            $query = mysqli_query($connect, "SELECT * FROM rekanan where NoPetak > 0");
+                                            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                                                echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Kontraktor Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="NoSPK_Harvesting" class="form-control" readonly required>
+                                        <input name="Kontraktor_Harvesting" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">SPK Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                       <input type="text" name="NoSPK_Harvesting" class="form-control" readonly required>
+                                        <input type="text" name="NoSPK_Harvesting" class="form-control" readonly>
                                     </div>
                                 </div>
+                                <script>
+                                    document.getElementById("NoPetak").addEventListener("change", function pengukuran42() {
+                                        var pilihan = this.value;
+                                        <?php
+                                        $data = array();
+                                        $query = mysqli_query($connect, "SELECT rekanan.NoPetak, rekanan.Nama_Kontraktor, rekanan.Sortimen_Kayu, 
+                                        harvesting.NoSPK, harvesting.Jenis_Tanaman FROM rekanan JOIN harvesting 
+                                        ON rekanan.NoPetak = harvesting.NoPetak ORDER BY rekanan.NoPetak");
+
+                                        while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                                            $data[] = $row;
+                                        }
+
+                                        echo 'var data = ' . json_encode($data) . ';';
+                                        ?>
+
+                                        if (data.length === 0) {
+                                            alert("NoPetak tidak ditemukan!");
+                                            return;
+                                        }
+
+                                        console.log("Data from PHP:", data);
+
+                                        var spk = "";
+                                        var kontraktor = "";
+                                        var jenis = "";
+                                        var sortimen = "";
+
+                                        for (var i = 0; i < data.length; i++) {
+                                            console.log("Checking:", data[i].NoPetak, pilihan);
+                                            if (pilihan == data[i].NoPetak) { // Use == for loose comparison
+                                                console.log("Match found!");
+                                                spk = data[i].NoSPK;
+                                                kontraktor = data[i].Nama_Kontraktor;
+                                                jenis = data[i].Jenis_Tanaman;
+                                                sortimen = data[i].Sortimen_Kayu;
+                                                break; // exit the loop once a match is found
+                                            }
+                                        }
+
+                                        console.log("Resulting values:", spk, kontraktor, jenis);
+
+                                        document.getElementsByName("NoSPK_Harvesting")[0].value = spk;
+                                        document.getElementsByName("Kontraktor_Harvesting")[0].value = kontraktor;
+                                        document.getElementsByName("Jenis_Kayu")[0].value = jenis;
+                                        document.getElementsByName("Sortimen_Kayu")[0].value = sortimen;
+                                    });
+                                </script>
                                 <div class="form-group row">
                                     <div class="col-md-4">Tanggal Ukur</div>
                                     <div class="col-md-1">:</div>
@@ -239,18 +290,14 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                     <div class="col-md-4">Jenis Kayu</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="NoSPK_Harvesting" class="form-control" readonly required>
+                                    <input type="text" name="Jenis_Kayu" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Sortimen</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <select id="sortimen" name="Sortimen_Kayu" class="form-control" onchange="luas()" required>
-                                            <option value="1">1</option>
-                                            <option value="2.8">2.8</option>
-                                            <option value="3.8">3.8</option>
-                                        </select>
+                                    <input type="text" name="Sortimen_Kayu" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -261,38 +308,57 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">P</div>
+                                    <div class="col-md-4">Panjang</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
                                         <input type="text" name="Panjang" class="form-control" required>
                                     </div>
+                                    <span class="col-md-2">m</span>
                                     </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">L</div>
+                                    <div class="col-md-4">Lebar</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
                                         <input type="text" name="Lebar" class="form-control" required>
                                     </div>
+                                    <span class="col-md-2">m</span>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">T</div>
+                                    <div class="col-md-4">Tinggi</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
                                         <input type="text" name="Tinggi" class="form-control" required>
                                     </div>
+                                    <span class="col-md-2">m</span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Nama Scaler</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Nama_Scaler" class="form-control" required>
+                                    <select name="Nama_Scaler" class="form-control" required>
+                                            <option value="">-PILIH NAMA SCALER-</option>
+                                            <?php
+                                            $query = mysqli_query($connect, "SELECT * FROM scaler where Jenis_Scaler = 'HARVESTING'");
+                                            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                                                echo '<option value="' . $row['Nama_Scaler'] . '">' . $row['Nama_Scaler'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Nama Pengawas</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                    <input type="text" name="Nama_Pengawas" class="form-control" required>
+                                    <select name="Nama_Pengawas" class="form-control" required>
+                                            <option value="">-PILIH NAMA PENGAWAS-</option>
+                                            <?php
+                                            $query = mysqli_query($connect, "SELECT * FROM pengawas where Jenis_Pengawas = 'HARVESTING'");
+                                            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                                                echo '<option value="' . $row['Nama_Pengawas'] . '">' . $row['Nama_Pengawas'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

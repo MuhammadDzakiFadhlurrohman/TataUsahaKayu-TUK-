@@ -1,7 +1,7 @@
 <?php
 include "../../config/connection.php";
 $id= $_GET['id'];
-$hapus = mysqli_query($connect, "DELETE FROM sceller where NIK_Sceller = '$id'");
+$hapus = mysqli_query($connect, "DELETE FROM scaler where NIK_Scaler = '$id'");
 
 if($hapus)
 {

@@ -113,7 +113,7 @@ include "../../assets/sidebar/operator.php";
                                             <th>Nama Alat</th>
                                             <th style="max-width: 300px">No. Alat</th>
                                             <th style="max-width: 300px">NIK</th>
-                                            <th>Nama Scaler</th>
+                                            <th>Nama Operator</th>
                                             <th style="max-width: 100px">Action</th>
                                         </tr>
                                     </thead>
@@ -129,7 +129,7 @@ include "../../assets/sidebar/operator.php";
                                             <td><?php echo $row['Nama_Alat'];?></td>
                                             <td><?php echo $row['No_Alat'];?></td>
                                             <td><?php echo $row['NIK_Operator'];?></td>
-                                            <td><?php echo $row['Nama_Scaler'];?></td>
+                                            <td><?php echo $row['Nama_Operator'];?></td>
                                             <td>
                                             <a href="h.php?id=<?=$row['No_Alat'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
@@ -181,7 +181,7 @@ include "../../assets/sidebar/operator.php";
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-md-4">Nama</div>
+                                            <div class="col-md-4">Nama Operator</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
                                                 <input type="text" name="Nama_Scaler" class="form-control" placeholder="Nama" required>

@@ -138,7 +138,7 @@ include "../assets/sidebar/harvesting.php";
                                             <td><?php echo $row['Luasan_Petak'];?></td>
                                             <td><?php echo $row['Jenis_Tanaman'];?></td>
                                             <td><?php echo $row['Tanggal_Tanam'];?></td>
-                                            <td><?php echo $row['Kontraktor_Harvesting'];?></td>
+                                            <td><?php echo $row['Nama_Kontraktor'];?></td>
                                             <td><?php echo $row['NoSPK'];?></td>
                                             <td><?php echo $row['Luasan_Tebangan'];?></td>
                                             <td><?php echo $row['Tanggal_Mulai'];?></td>
@@ -173,11 +173,11 @@ include "../assets/sidebar/harvesting.php";
                                     <div class="col-md-4">No. Petak</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Nopetak" name="NoPetak" class="form-control" onchange="luas()" required>
+                                        <select id="Nopetak" name="NoPetak" class="form-control" onchange="harvest()" required>
                                         <option value="">-PILIH NOMOR PETAK-</option>
                                         <?php
                                          include "../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from rkt");
+                                        $query = mysqli_query($connect, "SELECT * from rekanan where NoPetak > 0");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                         echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
                                         }
@@ -210,23 +210,14 @@ include "../assets/sidebar/harvesting.php";
                                     <div class="col-md-4">Kontraktor Harvesting</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Kontraktor_Harvesting" name="Kontraktor_Harvesting" class="form-control" required>
-                                        <option value="">-PILIH KONTRAKTOR HARVESTING-</option>
-                                        <?php
-                                         include "../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from rekanan WHERE Jenis_Pekerjaan = 'HR'");
-                                        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo '<option value="' . $row['Nama_Kontraktor'] . '">' . $row['Nama_Kontraktor'] . '</option>';
-                                        }
-                                        ?>
-                                         </select>
+                                    <input name="Nama_Kontraktor" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">No. SPK</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="NoSPK" class="form-control" required>
+                                        <input type="text" name="NoSPK" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -237,27 +228,53 @@ include "../assets/sidebar/harvesting.php";
                                     </div>
                                 </div>
                                 <script>
-                                  document.getElementById("Nopetak").addEventListener("change", function luas() {
-                                  var pilihan = this.value;
-                                  var luas = "";
-                                  var jt = "";
-                                  var tanggal = "";
+                                document.getElementById("Nopetak").addEventListener("change", function harvest() {
+                                    var pilihan = this.value;
 
-                                  <?php
-                                  $query = mysqli_query($connect, "SELECT * from rkt");
-                                  while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo 'if (pilihan === "' . $row['NoPetak'] . '") {';
-                                        echo 'luas = "' . $row['Luasan_Petak'] . '";';
-                                        echo 'jt = "' . $row['Jenis_Tanaman'] . '";';
-                                        echo 'tanggal = "' . $row['Tanggal_Tanam'] . '";';
-                                        echo '}';
-                                  }
-                                  ?>
-                                  
+                                    <?php
+                                    $data = array();
+                                    $query = mysqli_query($connect, "SELECT rekanan.Nama_Kontraktor, rekanan.NoSPK, rkt.NoPetak, rkt.Luasan_Petak, rkt.Jenis_Tanaman, rkt.Tanggal_Tanam 
+                                    FROM rekanan JOIN rkt ON rekanan.NoPetak = rkt.NoPetak ORDER BY rekanan.NoPetak");
 
-                                  document.getElementsByName("Luasan_Petak")[0].value = luas;
-                                  document.getElementsByName("Jenis_Tanaman")[0].value = jt;
-                                  document.getElementsByName("Tanggal_Tanam")[0].value = tanggal;
+                                    
+                                    while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                                        $data[] = $row;
+                                    }
+
+                                    echo 'var data = ' . json_encode($data) . ';';
+                                    ?>
+                                if (data.length === 0) {
+                                  alert("NoPetak tidak ditemukan!");
+                                }
+
+                                    console.log("Data from PHP:", data);
+
+                                    var luas = "";
+                                    var jt = "";
+                                    var tanggal = "";
+                                    var kontraktor = "";
+                                    var spk = "";
+
+                                    for (var i = 0; i < data.length; i++) {
+                                        console.log("Checking:", data[i].NoPetak, pilihan);
+                                        if (pilihan === data[i].NoPetak) {
+                                            console.log("Match found!");
+                                            luas = data[i].Luasan_Petak;
+                                            jt = data[i].Jenis_Tanaman;
+                                            tanggal = data[i].Tanggal_Tanam;
+                                            kontraktor = data[i].Nama_Kontraktor;
+                                            spk = data[i].NoSPK;
+                                            break; // exit the loop once a match is found
+                                        }
+                                    }
+
+                                    console.log("Resulting values:", luas, jt, tanggal, kontraktor, spk);
+
+                                    document.getElementsByName("Luasan_Petak")[0].value = luas;
+                                    document.getElementsByName("Jenis_Tanaman")[0].value = jt;
+                                    document.getElementsByName("Tanggal_Tanam")[0].value = tanggal;
+                                    document.getElementsByName("Nama_Kontraktor")[0].value = kontraktor;
+                                    document.getElementsByName("NoSPK")[0].value = spk;
                                 });
                                 </script>
                                 <div class="form-group row">

@@ -253,7 +253,7 @@ include '../../../assets/sidebar/tuk/hauling/42.php';
                                         <select name="Kontraktor_Hauling" class="form-control" required>
                                             <option value="">-PILIH KONTRAKTOR HAULING</option>
                                             <?php
-                                            $query = mysqli_query($connect, "SELECT * from rekanan WHERE Jenis_Pekerjaan = 'HL'");
+                                            $query = mysqli_query($connect, "SELECT * from rekanan");
                                             while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                             echo '<option value="' . $row['Nama_Kontraktor'] . '">' . $row['Nama_Kontraktor'] . '</option>';
                                             }
@@ -291,13 +291,6 @@ include '../../../assets/sidebar/tuk/hauling/42.php';
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">Sortimen</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="Panjang" class="form-control" value="4.2" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <div class="col-md-4">No. Batang</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
@@ -311,22 +304,6 @@ include '../../../assets/sidebar/tuk/hauling/42.php';
                                         ?>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Panjang</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="Panjang" class="form-control" value="4.2" readonly>
-                                    </div>
-                                    <div class="col-md-3">m</div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Diameter</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                    <input type="text" name="Diameter" class="form-control" placeholder="Diameter" required>
-                                    </div>
-                                    <div class="col-md-3">cm</div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">Operator Loading</div>

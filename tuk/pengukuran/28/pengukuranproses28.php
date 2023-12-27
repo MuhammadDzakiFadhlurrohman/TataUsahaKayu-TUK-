@@ -10,7 +10,7 @@ $currentTotal = $currentTotalRow['total'];
 $newTotal = $currentTotal;
 
 $NoPetak=$_POST['NoPetak'];
-$Nama_Kontraktor=$_POST['Nama_Kontraktor'];
+$Kontraktor_Harvesting=$_POST['Kontraktor_Harvesting'];
 $NoSPK_Harvesting=$_POST['NoSPK_Harvesting'];
 $Tanggal_Ukur=$_POST['Tanggal_Ukur'];
 $Jenis_Kayu=$_POST['Jenis_Kayu'];
@@ -35,7 +35,16 @@ elseif ($Jenis_Kayu === ' Rimba Campuran') {
 
 $m3=$Panjang*$Lebar*$Tinggi*$faktorPengali;
 
-$query=mysqli_query($connect, "INSERT INTO pengukuran28 VALUES ('','$NoPetak','$Nama_Kontraktor', 'NoSPK_Harvesting', '$Tanggal_Ukur','$Jenis_Kayu','$Sortimen_Kayu','$NoTumpukan','$Panjang','$Lebar','$Tinggi','$m3','$Nama_Scaler','$Nama_Pengawas')");
+$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM pengukuran28 WHERE NoPetak='$NoPetak'");
+if (mysqli_num_rows($cekNoPetak)>0) {
+// Nilai NoPetak sudah ada
+echo '<script>
+alert("No. Petak Sudah Diinput Silahkan Input No. Petak Lainnya");
+window.location.href="index.php"
+</script>';
+} else {
+
+$query=mysqli_query($connect, "INSERT INTO pengukuran28 VALUES ('','$NoPetak','$Kontraktor_Harvesting', 'NoSPK_Harvesting', '$Tanggal_Ukur','$Jenis_Kayu','$Sortimen_Kayu','$NoTumpukan','$Panjang','$Lebar','$Tinggi','$m3','$Nama_Scaler','$Nama_Pengawas')");
 if ($query) {
     echo '<script>
         alert("Data Berhasil Disimpan. Total Data: ' . $newTotal + 1 . '");
@@ -46,5 +55,6 @@ if ($query) {
         alert("Data Gagal Disimpan");
         window.location.href="index28.php"
     </script>';
+}
 }
 ?>

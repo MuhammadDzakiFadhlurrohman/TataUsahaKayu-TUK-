@@ -30,7 +30,16 @@ $Nama_Pengawas = $_POST['Nama_Pengawas'];
 
 // Calculate m3
 $m3 = ((($Diameter ** 2 ) * $Panjang ) *  0.7854) / 10000;
-// Insert data into hauling42 table along with updating the total
+
+// Cek apakah nilai NoPetak sudah ada di database
+$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM harvesting WHERE NoPetak='$NoPetak'");
+if (mysqli_num_rows($cekNoPetak)>0) {
+// Nilai NoPetak sudah ada
+echo '<script>
+alert("No. Petak Sudah Diinput Silahkan Input No. Petak Lainnya");
+window.location.href="index.php"
+</script>';
+} else {
 $query = mysqli_query($connect, "INSERT INTO hauling42 (NoPetak, Kontraktor_Harvesting, NoSPK_Harvesting, NoSPK_Hauling, Tanggal_Hauling, Jenis_Kayu, Sortimen, NoBatang, Panjang, Diameter, m3, Nama_Operator, NoAlat, Driver, NoTruck, NoTrip_Angkutan, Nama_Scaler, Nama_Pengawas, total) 
 VALUES ('$NoPetak', '$Kontraktor_Harvesting', '$NoSPK_Harvesting', '$NoSPK_Hauling', '$Tanggal_Hauling', '$Jenis_Kayu', '$Sortimen', '$NoBatang', '$Panjang', '$Diameter', '$m3', '$Nama_Operator', '$NoAlat', '$Driver', '$NoTruck', '$NoTrip_Angkutan', '$Nama_Scaler', '$Nama_Pengawas', '$newTotal')");
 
@@ -45,4 +54,6 @@ if ($query) {
         window.location.href="index42.php"
     </script>';
 }
+}
+
 ?>

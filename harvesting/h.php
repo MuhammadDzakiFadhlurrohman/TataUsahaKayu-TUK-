@@ -1,7 +1,7 @@
 <?php
 include "../config/connection.php";
 $id= $_GET['id'];
-$hapus = mysqli_query($connect, "DELETE FROM tebangan where No_Tebangan = '$id'");
+$hapus = mysqli_query($connect, "DELETE FROM harvesting where No_Tebangan = '$id'");
 
 if($hapus)
 {

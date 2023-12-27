@@ -137,7 +137,7 @@ include "../assets/sidebar/rekanan.php";
                                             <td><?php echo $row['NoSPK'];?></td>
                                             <td><?php echo $row['Jenis_Pekerjaan'];?></td>
                                             <td><?php echo $row['NoPetak'];?></td>
-                                            <td><?php echo $row['Nama_Operator'];?></td>
+                                            <td><?php echo $row['Nama_Driver'];?></td>
                                             <td><?php echo $row['NoAlat_Angkut'];?></td>
                                             <td><?php echo $row['Sortimen_Kayu'];?></td>
                                             <td>
@@ -226,7 +226,7 @@ include "../assets/sidebar/rekanan.php";
                                     <div class="col-md-4">No. Petak</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <select id="Nopetak" name="NoPetak" class="form-control"  required onchange="nopet()">
+                                        <select id="Nopetak" name="NoPetak" class="form-control"  required>
                                         <option value="">-PILIH NOMOR PETAK-</option>
                                         <?php
                                         $query = mysqli_query($connect, "SELECT * from rkt");
@@ -248,7 +248,8 @@ include "../assets/sidebar/rekanan.php";
                                   function checkJP() {
                                     var jenisPekerjaan = document.querySelector('input[name="Jenis_Pekerjaan"]:checked').value;
                                     var noPetakElement = document.getElementById('Nopetak');
-                                    var namaDriverElement = document.getElementsByName('Nama_Operator')[0];
+                                    var jtElement = document.getElementsByName('Jenis_Tanaman')[0];
+                                    var namaDriverElement = document.getElementsByName('Nama_Driver')[0];
                                     var alatAngkutElement = document.getElementsByName('NoAlat_Angkut')[0];
                                    
                                     noPetakElement.disabled = false;
@@ -264,6 +265,9 @@ include "../assets/sidebar/rekanan.php";
                                     } else if (jenisPekerjaan === 'HL') {
                                         // Jika jenis pekerjaan bukan "Harvesting", aktifkan kembali NoPetak, nama driver, dan alat angkut
                                         noPetakElement.disabled = true;
+                                        noPetakElement.value = '';
+                                        jtElement.disabled = true;
+                                        jtElement.value = '';
                                         namaDriverElement.disabled = false;
                                         namaDriverElement.value = '';
                                         alatAngkutElement.disabled = false;
@@ -272,7 +276,7 @@ include "../assets/sidebar/rekanan.php";
                                 }
 
                                 function validateCheckbox() {
-                                    var checkboxes = document.querySelectorAll('input[name="Sortimen_Kayu[]"]:checked');
+                                    var checkboxes = document.querySelectorAll('input name=Sortimen_Kayu[] :checked');
                                     
                                     if (checkboxes.length === 0) {
                                         alert("Pilih setidaknya satu opsi.");
@@ -303,7 +307,7 @@ include "../assets/sidebar/rekanan.php";
                                     <div class="col-md-4">Nama Driver</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="text" name="Nama_Operator" class="form-control" required>
+                                        <input type="text" name="Nama_Driver" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">

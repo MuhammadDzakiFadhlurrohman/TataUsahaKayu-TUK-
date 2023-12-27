@@ -101,7 +101,7 @@ include  "../../assets/sidebar/pengawas.php";
                     <div class="col-md col-sm col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title d-inline">Overseer List</h4>
+                                <h4 class="card-title d-inline">Supervisor List</h4>
                                 <span class="float-right"><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
                             </div> 
                             <!-- Card Body -->
@@ -163,7 +163,6 @@ include  "../../assets/sidebar/pengawas.php";
                                                 <option value="">Pilih Jenis Pengawas</option>
                                                 <option value="HARVESTING">HARVESTING</option>
                                                 <option value="HAULING">HAULING</option>
-                                                <option value="PENGUKURAN">PENGUKURAN</option>
                                                 </select>
                                             </div>
                                         </div>

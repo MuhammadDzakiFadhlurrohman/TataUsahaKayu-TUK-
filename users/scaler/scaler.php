@@ -112,7 +112,7 @@ include "../../assets/sidebar/scaler.php";
                                             <th style="width: 10px">#</th>
                                             <th style="max-width: 200px">Jenis Scaler</th>
                                             <th style="max-width: 300px">NIK</th>
-                                            <th>Nama</th>
+                                            <th>Nama Scaler</th>
                                             <th style="max-width: 100px">Action</th>
                                         </tr>
                                     </thead>
@@ -162,7 +162,6 @@ include "../../assets/sidebar/scaler.php";
                                                 <option value="">Pilih Jenis Scaler</option>
                                                 <option value="HARVESTING">HARVESTING</option>
                                                 <option value="HAULING">HAULING</option>
-                                                <option value="PENGUKURAN">PENGUKURAN</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -26,7 +26,7 @@ include "../../../config/connection.php";
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../../../users/user/index.php"><i class="fa fa-circle-o"></i>&nbsp;User</a></li>
-                        <li><a href="../../../users/pengawas/pengawas.php"><i class="fa fa-circle-o"></i>&nbsp;Supervisor</a></li>
+                        <li><a href="../../../users/pengawas/pengawas.php"><i class="fa fa-circle-o"></i>&nbsp;Pengawas</a></li>
                         <li><a href="../../../users/scaler/scaler.php"><i class="fa fa-circle-o"></i>&nbsp;Scaler</a></li>
                         <li><a href="../../../users/operator/operator.php"><i class="fa fa-circle-o"></i>&nbsp;Operator</a></li>
                     </ul>
