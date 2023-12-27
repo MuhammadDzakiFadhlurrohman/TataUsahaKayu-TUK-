@@ -27,7 +27,7 @@ $Nama_Scaler=$_POST['Nama_Scaler'];
 $Nama_Pengawas=$_POST['Nama_Pengawas'];
 
 // Cek apakah nilai NoPetak sudah ada di database
-$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM harvesting WHERE NoPetak='$NoPetak'");
+$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM hauling28 WHERE NoPetak='$NoPetak'");
 if (mysqli_num_rows($cekNoPetak)>0) {
 // Nilai NoPetak sudah ada
 echo '<script>

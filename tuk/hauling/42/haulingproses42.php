@@ -32,7 +32,7 @@ $Nama_Pengawas = $_POST['Nama_Pengawas'];
 $m3 = ((($Diameter ** 2 ) * $Panjang ) *  0.7854) / 10000;
 
 // Cek apakah nilai NoPetak sudah ada di database
-$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM harvesting WHERE NoPetak='$NoPetak'");
+$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM hauling42 WHERE NoPetak='$NoPetak'");
 if (mysqli_num_rows($cekNoPetak)>0) {
 // Nilai NoPetak sudah ada
 echo '<script>
