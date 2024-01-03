@@ -177,7 +177,7 @@ include "../../assets/sidebar/operator.php";
                                             <div class="col-md-4">NIK</div>
                                             <div class="col-md-1">:</div>
                                             <div class="col-md">
-                                                <input type="text" name="NIK_Operator" class="form-control" placeholder="NIK" required>
+                                                <input type="text" name="NIK_Operator" class="form-control" placeholder="NIK" maxlength="6" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">

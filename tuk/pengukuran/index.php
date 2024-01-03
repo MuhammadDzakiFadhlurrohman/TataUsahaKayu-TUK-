@@ -122,6 +122,27 @@ include "../../assets/sidebar/tuk/pengukuran/pengukuran.php";
                             // Calculate the overall total
                             $overallTotal = $currentTotalPengukuran42 + $currentTotalPengukuran28;
 
+                            //hauling 
+                            $haulingQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling42");
+                                if (!$haulingQuery) {
+                                    echo "Error: " . mysqli_error($connect);
+                                }
+
+                                $haulingRow42 = mysqli_fetch_assoc($haulingQuery);
+                                $totalHauling42 = $haulingRow42['total'];
+                            $haulingQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling28");
+                            if (!$haulingQuery) {
+                                echo "Error: " . mysqli_error($connect);
+                                }
+
+                                $haulingRow28 = mysqli_fetch_assoc($haulingQuery);
+                                $totalHauling28 = $haulingRow28['total'];
+
+                                $totalHauling = $totalHauling42 + $totalHauling28;
+                            
+
+                                $stockKayu = $overallTotal - $totalHauling;
+
                             // total m3 non batang
                             $totalm328 = mysqli_query($connect, "SELECT SUM(m3) AS totalm328 FROM pengukuran28");
                             $totalm328 = mysqli_fetch_assoc($totalm328);
@@ -134,11 +155,8 @@ include "../../assets/sidebar/tuk/pengukuran/pengukuran.php";
 
                             // total m3
                             $totalm3 = $totalm328 + $totalm342;
-
-                            ?>
-
-                            <?php
-                            echo "<div>Total Kayu: $overallTotal</div>";
+                            
+                            echo "<div>Total Stock Kayu: $stockKayu</div>";
                             echo "<div>Total M3: $totalm3</div>";
                             ?>
                             </div> 

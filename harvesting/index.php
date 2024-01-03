@@ -177,7 +177,7 @@ include "../assets/sidebar/harvesting.php";
                                         <option value="">-PILIH NOMOR PETAK-</option>
                                         <?php
                                          include "../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from rekanan where NoPetak > 0");
+                                        $query = mysqli_query($connect, "SELECT * from rekanan");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                         echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
                                         }
@@ -227,7 +227,28 @@ include "../assets/sidebar/harvesting.php";
                                         <input type="text" name="Luasan_Tebangan" class="form-control" required>
                                     </div>
                                 </div>
-                                <script>
+                                <div class="form-group row">
+                                    <div class="col-md-4">Tanggal Tebang</div>
+                                    <div class="col-md-1">:</div>
+                                    <div class="col-md">
+                                        Tanggal Mulai
+                                        <input type="date" name="Tanggal_Mulai" class="form-control" placeholder="Tanggal Mulai" required>
+                                        Tanggal Berakhir
+                                        <input type="date" name="Tanggal_Berakhir" class="form-control" placeholder="Tanggal Berakhir" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" name="save" class="btn btn-primary">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- /.content -->
+            <script>
                                 document.getElementById("Nopetak").addEventListener("change", function harvest() {
                                     var pilihan = this.value;
 
@@ -277,27 +298,6 @@ include "../assets/sidebar/harvesting.php";
                                     document.getElementsByName("NoSPK")[0].value = spk;
                                 });
                                 </script>
-                                <div class="form-group row">
-                                    <div class="col-md-4">Tanggal Tebang</div>
-                                    <div class="col-md-1">:</div>
-                                    <div class="col-md">
-                                        Tanggal Mulai
-                                        <input type="date" name="Tanggal_Mulai" class="form-control" placeholder="Tanggal Mulai" required>
-                                        Tanggal Berakhir
-                                        <input type="date" name="Tanggal_Berakhir" class="form-control" placeholder="Tanggal Berakhir" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" name="save" class="btn btn-primary">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <!-- /.content -->
         <!-- /.content-wrapper -->
     </div>
     

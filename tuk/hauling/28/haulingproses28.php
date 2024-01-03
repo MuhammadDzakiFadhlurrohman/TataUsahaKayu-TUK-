@@ -26,13 +26,13 @@ $NoTrip_Angkutan=$_POST['NoTrip_Angkutan'];
 $Nama_Scaler=$_POST['Nama_Scaler'];
 $Nama_Pengawas=$_POST['Nama_Pengawas'];
 
-// Cek apakah nilai NoPetak sudah ada di database
-$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM hauling28 WHERE NoPetak='$NoPetak'");
-if (mysqli_num_rows($cekNoPetak)>0) {
-// Nilai NoPetak sudah ada
+// Cek apakah nilai NoTumpukan sudah ada di database
+$cekNoTumpukan=mysqli_query($connect, "SELECT NoTumpukan FROM hauling28 WHERE NoTumpukan='$NoTumpukan'");
+if (mysqli_num_rows($cekNoTumpukan)>0) {
+// Nilai NoTumpukan sudah ada
 echo '<script>
-alert("No. Petak Sudah Diinput Silahkan Input No. Petak Lainnya");
-window.location.href="index.php"
+alert("No. Tumpukan Sudah Diinput Silahkan Input No. Tumpukan Lainnya");
+window.location.href="index28.php"
 </script>';
 } else {
 $query=mysqli_query($connect, "INSERT INTO hauling28 VALUES ('','$NoPetak','$Kontraktor_Harvesting', '$NoSPK_Haversting', '$Kontraktor_Hauling', '$NoSPK_Hauling', '$Tanggal_Hauling', '$Jenis_Kayu', '$Sortimen_Kayu', '$NoTumpukan', '$Nama_Operator', '$No_Alat', '$Nama_Driver', '$NoAlat_Angkut', '$NoTrip_Angkutan', '$Nama_Scaler', '$Nama_Pengawas', $newTotal)");

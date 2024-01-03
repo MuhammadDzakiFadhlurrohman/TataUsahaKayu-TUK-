@@ -215,7 +215,17 @@ include "../assets/sidebar/rkt.php";
                                         </select>
                                     </div>
                                 </div>
-                                <script>
+                                <div class="modal-footer">
+                                <input type="submit" name="save" class="btn btn-primary">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                        </form>
+                     </div>
+                </div>
+            </div>      
+            <!-- /.content -->
+            <script>
                                 function rc() {
                                     var jenisTanaman = document.getElementById('Jenis_Tanaman').value;
                                     var jarakTanam = document.getElementById('Jarak_Tanam');
@@ -233,16 +243,6 @@ include "../assets/sidebar/rkt.php";
                                     
                                 }
                                 </script>
-                                <div class="modal-footer">
-                                <input type="submit" name="save" class="btn btn-primary">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                            </div>
-                        </form>
-                     </div>
-                </div>
-            </div>      
-            <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
     </div>

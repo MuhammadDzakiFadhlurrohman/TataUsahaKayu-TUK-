@@ -71,10 +71,6 @@ if(isset($_SESSION['Username'])==0)
                                     <img src="assets/images/Avatars/avatar.png" class="img-circle" alt="User Image">
                                     <p>
                                     <?php echo $_SESSION['Username'];?>
-                                    <?php echo date_default_timezone_set('Asia/Jakarta');
-                                    $jam=date("Y-m-d");
-                                    echo "<small> Tanggal Hari ini <br>". $jam." "."</small>"
-                                    ?>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->

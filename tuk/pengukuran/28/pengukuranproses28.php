@@ -35,14 +35,14 @@ elseif ($Jenis_Kayu === ' Rimba Campuran') {
 
 $m3=$Panjang*$Lebar*$Tinggi*$faktorPengali;
 
-$cekNoPetak=mysqli_query($connect, "SELECT NoPetak FROM pengukuran28 WHERE NoPetak='$NoPetak'");
-if (mysqli_num_rows($cekNoPetak)>0) {
+$cekNoPetak28=mysqli_query($connect, "SELECT NoPetak FROM pengukuran28 WHERE NoPetak='$NoPetak'");
+if (mysqli_num_rows($cekNoPetak28)>0) {
 // Nilai NoPetak sudah ada
 echo '<script>
 alert("No. Petak Sudah Diinput Silahkan Input No. Petak Lainnya");
-window.location.href="index.php"
+window.location.href="index28.php"
 </script>';
-} else {
+} else{
 
 $query=mysqli_query($connect, "INSERT INTO pengukuran28 VALUES ('','$NoPetak','$Kontraktor_Harvesting', 'NoSPK_Harvesting', '$Tanggal_Ukur','$Jenis_Kayu','$Sortimen_Kayu','$NoTumpukan','$Panjang','$Lebar','$Tinggi','$m3','$Nama_Scaler','$Nama_Pengawas')");
 if ($query) {

@@ -244,65 +244,6 @@ include "../assets/sidebar/rekanan.php";
                                     <input name="Jenis_Tanaman" class="form-control" readonly>
                                     </div>
                                 </div>
-                                <script>
-                                  function checkJP() {
-                                    var jenisPekerjaan = document.querySelector('input[name="Jenis_Pekerjaan"]:checked').value;
-                                    var noPetakElement = document.getElementById('Nopetak');
-                                    var jtElement = document.getElementsByName('Jenis_Tanaman')[0];
-                                    var namaDriverElement = document.getElementsByName('Nama_Driver')[0];
-                                    var alatAngkutElement = document.getElementsByName('NoAlat_Angkut')[0];
-                                   
-                                    noPetakElement.disabled = false;
-                                    namaDriverElement.disabled = false;
-                                    alatAngkutElement.disabled = false;
-
-                                    if (jenisPekerjaan === 'HR') {
-                                        // Jika jenis pekerjaan adalah "Harvesting", nonaktifkan atau kosongkan NoPetak, nama driver, dan alat angkut
-                                        namaDriverElement.disabled = true;
-                                        namaDriverElement.value = '';
-                                        alatAngkutElement.disabled = true;
-                                        alatAngkutElement.value = '';
-                                    } else if (jenisPekerjaan === 'HL') {
-                                        // Jika jenis pekerjaan bukan "Harvesting", aktifkan kembali NoPetak, nama driver, dan alat angkut
-                                        noPetakElement.disabled = true;
-                                        noPetakElement.value = '';
-                                        jtElement.disabled = true;
-                                        jtElement.value = '';
-                                        namaDriverElement.disabled = false;
-                                        namaDriverElement.value = '';
-                                        alatAngkutElement.disabled = false;
-                                        alatAngkutElement.value = '';
-                                    }
-                                }
-
-                                function validateCheckbox() {
-                                    var checkboxes = document.querySelectorAll('input name=Sortimen_Kayu[] :checked');
-                                    
-                                    if (checkboxes.length === 0) {
-                                        alert("Pilih setidaknya satu opsi.");
-                                        return false; // Mencegah formulir disubmit
-                                    }
-
-                                    // Jika setidaknya satu opsi dicentang, formulir dapat disubmit
-                                    return true;
-                                }
-
-                                  document.getElementById("Nopetak").addEventListener("change", function nopet() {
-                                  var pilihan = this.value;
-                                  var jt = "";
-
-                                  <?php
-                                  $query = mysqli_query($connect, "SELECT * from rkt");
-                                  while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
-                                        echo 'if (pilihan == "' . $row['NoPetak'] . '") {';
-                                        echo 'jt = "' . $row['Jenis_Tanaman'] . '";';
-                                        echo '}';
-                                  }
-                                  ?>
-                                  
-                                  document.getElementsByName("Jenis_Tanaman")[0].value = jt;
-                                });
-                                </script>
                                 <div class="form-group row">
                                     <div class="col-md-4">Nama Driver</div>
                                     <div class="col-md-1">:</div>
@@ -370,6 +311,65 @@ include "../assets/sidebar/rekanan.php";
                 </div>
             </section>
             <!-- /.content -->
+            <script>
+                                  function checkJP() {
+                                    var jenisPekerjaan = document.querySelector('input[name="Jenis_Pekerjaan"]:checked').value;
+                                    var noPetakElement = document.getElementById('Nopetak');
+                                    var jtElement = document.getElementsByName('Jenis_Tanaman')[0];
+                                    var namaDriverElement = document.getElementsByName('Nama_Driver')[0];
+                                    var alatAngkutElement = document.getElementsByName('NoAlat_Angkut')[0];
+                                   
+                                    noPetakElement.disabled = false;
+                                    namaDriverElement.disabled = false;
+                                    alatAngkutElement.disabled = false;
+
+                                    if (jenisPekerjaan === 'HR') {
+                                        // Jika jenis pekerjaan adalah "Harvesting", nonaktifkan atau kosongkan NoPetak, nama driver, dan alat angkut
+                                        namaDriverElement.disabled = true;
+                                        namaDriverElement.value = '';
+                                        alatAngkutElement.disabled = true;
+                                        alatAngkutElement.value = '';
+                                    } else if (jenisPekerjaan === 'HL') {
+                                        // Jika jenis pekerjaan bukan "Harvesting", aktifkan kembali NoPetak, nama driver, dan alat angkut
+                                        noPetakElement.disabled = true;
+                                        noPetakElement.value = '';
+                                        jtElement.disabled = true;
+                                        jtElement.value = '';
+                                        namaDriverElement.disabled = false;
+                                        namaDriverElement.value = '';
+                                        alatAngkutElement.disabled = false;
+                                        alatAngkutElement.value = '';
+                                    }
+                                }
+
+                                function validateCheckbox() {
+                                    var checkboxes = document.querySelectorAll('input name=Sortimen_Kayu[] :checked');
+                                    
+                                    if (checkboxes.length === 0) {
+                                        alert("Pilih setidaknya satu opsi.");
+                                        return false; // Mencegah formulir disubmit
+                                    }
+
+                                    // Jika setidaknya satu opsi dicentang, formulir dapat disubmit
+                                    return true;
+                                }
+
+                                  document.getElementById("Nopetak").addEventListener("change", function nopet() {
+                                  var pilihan = this.value;
+                                  var jt = "";
+
+                                  <?php
+                                  $query = mysqli_query($connect, "SELECT * from rkt");
+                                  while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
+                                        echo 'if (pilihan == "' . $row['NoPetak'] . '") {';
+                                        echo 'jt = "' . $row['Jenis_Tanaman'] . '";';
+                                        echo '}';
+                                  }
+                                  ?>
+                                  
+                                  document.getElementsByName("Jenis_Tanaman")[0].value = jt;
+                                });
+                                </script>
         </div>
         <!-- /.content-wrapper -->
     </div>

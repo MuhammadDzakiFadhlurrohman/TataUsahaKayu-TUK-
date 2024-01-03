@@ -103,27 +103,31 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                 <h4 class="card-title d-inline">List Pengukuran Non Batang</h4>
                                 <span class="float-right"><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#InputModal"><i class="fa fa-plus"></i></a></span>
                                 <?php
-                                // Retrieve data from the hauling table
-                                $query = mysqli_query($connect, "SELECT * FROM pengukuran28");
-                                // Check if the query was successful
-                                if (!$query) {
+                                // Retrieve data from the pengukuran28 table
+                                $pengukuranQuery = mysqli_query($connect, "SELECT COUNT(*) as total, SUM(m3) AS totalm3 FROM pengukuran28");
+                                if (!$pengukuranQuery) {
                                     echo "Error: " . mysqli_error($connect);
                                 }
-                                // Fetch the total directly from the database using SQL
-                                $currentTotalQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM pengukuran28");
-                                $currentTotalRow = mysqli_fetch_assoc($currentTotalQuery);
-                                $currentTotal = $currentTotalRow['total'];
-                                // Increment the current total by 1
-                                $newTotal = $currentTotal ;
 
-                                // M3
-                                $totalm3 = mysqli_query($connect, "SELECT SUM(m3) AS totalm3 FROM pengukuran28");
-                                $totalm3 = mysqli_fetch_assoc($totalm3);
-                                $totalm3 = format_angka($totalm3['totalm3']);
-                                ?>
-                                <?php
-                                echo "<div>Total Kayu: $newTotal</div>";
-                                echo "<div>Total m3: $totalm3</div>";
+                                $pengukuranRow = mysqli_fetch_assoc($pengukuranQuery);
+                                $totalPengukuran = $pengukuranRow['total'];
+                                $totalm3Pengukuran = format_angka($pengukuranRow['totalm3']);
+
+                                // Retrieve data from the hauling28 table
+                                $haulingQuery = mysqli_query($connect, "SELECT COUNT(*) as total FROM hauling28");
+                                if (!$haulingQuery) {
+                                    echo "Error: " . mysqli_error($connect);
+                                }
+
+                                $haulingRow = mysqli_fetch_assoc($haulingQuery);
+                                $totalHauling = $haulingRow['total'];
+
+                                // Calculate the difference
+                                $difference = $totalPengukuran - $totalHauling;
+
+                                
+                                echo "<div>Stock Pengukuran : $difference</div>";
+                                echo "<div>Total m3 : $totalm3Pengukuran</div>";
                                 ?>
                                 <div>
                                     <br>
@@ -231,54 +235,6 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                                         <input type="text" name="NoSPK_Harvesting" class="form-control" readonly>
                                     </div>
                                 </div>
-                                <script>
-                                    document.getElementById("NoPetak").addEventListener("change", function pengukuran42() {
-                                        var pilihan = this.value;
-                                        <?php
-                                        $data = array();
-                                        $query = mysqli_query($connect, "SELECT rekanan.NoPetak, rekanan.Nama_Kontraktor, rekanan.Sortimen_Kayu, 
-                                        harvesting.NoSPK, harvesting.Jenis_Tanaman FROM rekanan JOIN harvesting 
-                                        ON rekanan.NoPetak = harvesting.NoPetak ORDER BY rekanan.NoPetak");
-
-                                        while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-                                            $data[] = $row;
-                                        }
-
-                                        echo 'var data = ' . json_encode($data) . ';';
-                                        ?>
-
-                                        if (data.length === 0) {
-                                            alert("NoPetak tidak ditemukan!");
-                                            return;
-                                        }
-
-                                        console.log("Data from PHP:", data);
-
-                                        var spk = "";
-                                        var kontraktor = "";
-                                        var jenis = "";
-                                        var sortimen = "";
-
-                                        for (var i = 0; i < data.length; i++) {
-                                            console.log("Checking:", data[i].NoPetak, pilihan);
-                                            if (pilihan == data[i].NoPetak) { // Use == for loose comparison
-                                                console.log("Match found!");
-                                                spk = data[i].NoSPK;
-                                                kontraktor = data[i].Nama_Kontraktor;
-                                                jenis = data[i].Jenis_Tanaman;
-                                                sortimen = data[i].Sortimen_Kayu;
-                                                break; // exit the loop once a match is found
-                                            }
-                                        }
-
-                                        console.log("Resulting values:", spk, kontraktor, jenis);
-
-                                        document.getElementsByName("NoSPK_Harvesting")[0].value = spk;
-                                        document.getElementsByName("Kontraktor_Harvesting")[0].value = kontraktor;
-                                        document.getElementsByName("Jenis_Kayu")[0].value = jenis;
-                                        document.getElementsByName("Sortimen_Kayu")[0].value = sortimen;
-                                    });
-                                </script>
                                 <div class="form-group row">
                                     <div class="col-md-4">Tanggal Ukur</div>
                                     <div class="col-md-1">:</div>
@@ -372,6 +328,43 @@ include "../../../assets/sidebar/tuk/pengukuran/28.php";
                 </div>
             </section>
             <!-- /.content -->
+            <script>
+            document.getElementById("NoPetak").addEventListener("change", function pengukuran42() {
+                var pilihan = this.value;
+                <?php
+                $data = array();
+                $query = mysqli_query($connect, "SELECT rekanan.NoPetak, rekanan.Nama_Kontraktor, rekanan.Sortimen_Kayu, 
+                harvesting.NoSPK, harvesting.Jenis_Tanaman FROM rekanan JOIN harvesting
+                ON rekanan.NoPetak = harvesting.NoPetak ORDER BY rekanan.NoPetak");
+                while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                    $data[] = $row;
+                }
+                echo 'var data = ' . json_encode($data) . ';';
+                ?>
+                if (data.length === 0) {
+                    alert("NoPetak tidak ditemukan!");
+                    return;
+                }
+                console.log("Data from PHP:", data);
+                var spk = "";
+                var kontraktor = "";
+                var jenis = "";
+                var sortimen = "";
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].NoPetak === pilihan) {
+                        spk = data[i].NoSPK;
+                        kontraktor = data[i].Nama_Kontraktor;
+                        jenis = data[i].Jenis_Tanaman;
+                        sortimen = data[i].Sortimen_Kayu;
+                        break;
+                    }
+                }
+                document.querySelector("input[name='NoSPK_Harvesting']").value = spk;
+                document.querySelector("input[name='Kontraktor_Harvesting']").value = kontraktor;
+                document.querySelector("input[name='Jenis_Kayu']").value = jenis;
+                document.querySelector("input[name='Sortimen_Kayu']").value = sortimen;
+            });
+            </script>
         </div>
         <!-- /.content-wrapper -->
     </div>
