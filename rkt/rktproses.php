@@ -5,7 +5,7 @@ $NoPetak=$_POST['NoPetak'];
 $Luasan_Petak=$_POST['Luasan_Petak'];
 $Jenis_Tanaman=$_POST['Jenis_Tanaman'];
 $Tanggal_Tanam=$_POST['Tanggal_Tanam'];
-$Kontraktor_Tanam=$_POST['Kontraktor_Tanam'];
+$Kontraktor_Tanam=ucwords($_POST['Kontraktor_Tanam']);
 $Jarak_Tanam=$_POST['Jarak_Tanam'];
 
 // Cek apakah nilai NoPetak sudah ada di database

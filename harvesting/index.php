@@ -177,7 +177,7 @@ include "../assets/sidebar/harvesting.php";
                                         <option value="">-PILIH NOMOR PETAK-</option>
                                         <?php
                                          include "../config/connection.php";
-                                        $query = mysqli_query($connect, "SELECT * from rekanan");
+                                        $query = mysqli_query($connect, "SELECT * from rekanan where NoPetak > 0");
                                         while($row = mysqli_fetch_array($query,MYSQLI_ASSOC)) {
                                         echo '<option value="' . $row['NoPetak'] . '">' . $row['NoPetak'] . '</option>';
                                         }

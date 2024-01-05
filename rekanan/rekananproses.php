@@ -2,16 +2,16 @@
 session_start();
 include "../config/connection.php";
 
-$Nama_Kontraktor=$_POST['Nama_Kontraktor'];
+$Nama_Kontraktor=ucwords($_POST['Nama_Kontraktor']);
 $Jenis_Badan_Usaha=$_POST['Jenis_Badan_Usaha'];
-$Nama_Direktur=$_POST['Nama_Direktur'];
+$Nama_Direktur=ucwords($_POST['Nama_Direktur']);
 $Alamat=$_POST['Alamat'];
 $NPWP=$_POST['NPWP'];
 $NoRekening=$_POST['NoRekening'];
 $Jenis_Pekerjaan=$_POST['Jenis_Pekerjaan'];
 $NoPetak=$_POST['NoPetak'];
 $Jenis_Tanaman=$_POST['Jenis_Tanaman'];
-$Nama_Driver=$_POST['Nama_Driver'];
+$Nama_Driver=ucwords($_POST['Nama_Driver']);
 $NoAlat_Angkut=$_POST['NoAlat_Angkut'];
 $Sortimen_Kayu = isset($_POST['Sortimen_Kayu']) ? json_encode($_POST['Sortimen_Kayu']) : null;
 $NoPBPH=$_POST['NoPBPH'];

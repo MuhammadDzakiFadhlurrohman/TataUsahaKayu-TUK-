@@ -5,7 +5,7 @@ include "../../config/connection.php";
 $Nama_Alat=$_POST['Nama_Alat'];
 $No_Alat=$_POST['No_Alat'];
 $NIK_Operator=$_POST['NIK_Operator'];
-$Nama_Scaler=$_POST['Nama_Scaler'];
+$Nama_Scaler=ucwords($_POST['Nama_Scaler']);
 
 // Cek apakah nilai NoPetak sudah ada di database
 $cekNIK=mysqli_query($connect, "SELECT NIK_Operator FROM operator WHERE NIK_Operator='$NIK_Operator'");

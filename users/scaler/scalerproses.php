@@ -4,7 +4,7 @@ include "../../config/connection.php";
 
 $Jenis_Scaler=$_POST['Jenis_Scaler'];
 $NIK_Scaler=$_POST['NIK_Scaler'];
-$Nama_Scaler=$_POST['Nama_Scaler'];
+$Nama_Scaler=ucwords($_POST['Nama_Scaler']);
 
 $cekNIK=mysqli_query($connect, "SELECT NIK_Scaler FROM Scaler WHERE NIK_Scaler='$NIK_Scaler'");
 if (mysqli_num_rows($cekNIK)>0) {

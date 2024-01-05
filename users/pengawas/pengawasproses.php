@@ -4,7 +4,7 @@ include "../../config/connection.php";
 
 $Jenis_Pengawas=$_POST['Jenis_Pengawas'];
 $NIK_Pengawas=$_POST['NIK_Pengawas'];
-$Nama_Pengawas=$_POST['Nama_Pengawas'];
+$Nama_Pengawas=ucwords($_POST['Nama_Pengawas']);
 
 // Cek apakah nilai NoPetak sudah ada di database
 $cekNIK=mysqli_query($connect, "SELECT NIK_Pengawas FROM pengawas WHERE NIK_Pengawas='$NIK_Pengawas'");
