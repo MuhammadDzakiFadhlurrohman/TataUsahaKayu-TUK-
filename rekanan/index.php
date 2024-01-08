@@ -142,6 +142,7 @@ include "../assets/sidebar/rekanan.php";
                                             <td><?php echo $row['Sortimen_Kayu'];?></td>
                                             <td>
                                             <a href="h.php?id=<?=$row['No_Rekanan'];?>"class="btn btn-danger btn-sm" role="button" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm view-btn" onclick="viewRekanan(<?php echo $row['No_Rekanan']; ?>)">View</a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -149,7 +150,7 @@ include "../assets/sidebar/rekanan.php";
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Modal Input -->
+         <!-- Modal Input -->
          <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -308,10 +309,30 @@ include "../assets/sidebar/rekanan.php";
                         </form>
                     </div>
                 </div>
-                </div>
+                </div> 
+         </div>
+        <!-- View -->   
+        <div id="ViewModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
             </section>
             <!-- /.content -->
             <script>
+            function viewRekanan(rekananID) {
+                // Menggunakan AJAX untuk mengambil data berdasarkan ID
+                $.ajax({
+                    type: 'GET',
+                    url: 'view_modal_content.php?id=' + rekananID, // Sesuaikan dengan URL skrip PHP Anda
+                    success: function (data) {
+                        // Menampilkan data dalam modal
+                        $('#ViewModal .modal-content').html(data);
+                        $('#ViewModal').modal('show');
+                    },
+                    error: function () {
+                        console.error('Error fetching data');
+                    }
+                });
+            }
                                   function checkJP() {
                                     var jenisPekerjaan = document.querySelector('input[name="Jenis_Pekerjaan"]:checked').value;
                                     var noPetakElement = document.getElementById('Nopetak');
@@ -369,7 +390,7 @@ include "../assets/sidebar/rekanan.php";
                                   
                                   document.getElementsByName("Jenis_Tanaman")[0].value = jt;
                                 });
-                                </script>
+                </script>
         </div>
         <!-- /.content-wrapper -->
     </div>

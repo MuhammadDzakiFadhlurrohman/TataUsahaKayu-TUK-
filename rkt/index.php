@@ -150,7 +150,7 @@ include "../assets/sidebar/rkt.php";
                     </div>
                 </div>
             </section>
-                            <!-- Modal Input -->
+        <!-- Modal Input -->
         <div id="InputModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -193,7 +193,7 @@ include "../assets/sidebar/rkt.php";
                                     <div class="col-md-4">Tanggal Tanam</div>
                                     <div class="col-md-1">:</div>
                                     <div class="col-md">
-                                        <input type="date" name="Tanggal_Tanam" class="form-control" required>
+                                        <input id="Tanggal_Tanam" type="date" name="Tanggal_Tanam" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -229,16 +229,22 @@ include "../assets/sidebar/rkt.php";
                                 function rc() {
                                     var jenisTanaman = document.getElementById('Jenis_Tanaman').value;
                                     var jarakTanam = document.getElementById('Jarak_Tanam');
+                                    var tanggalTanam = document.getElementById('Tanggal_Tanam');
                                     jarakTanam.disabled = false;
+                                    tanggalTanam.disabled = false;
 
                                     if (jenisTanaman === 'RimbaCampuran') {
                                         // Jika jenis pekerjaan adalah "Harvesting", nonaktifkan atau kosongkan NoPetak, nama driver, dan alat angkut
                                         
                                         jarakTanam.disabled = true;
                                         jarakTanam.value = '';
+                                        tanggalTanam.disabled = true;
+                                        tanggalTanam.value = '';
                                     } else {
                                         jarakTanam.disabled = false;
                                         jarakTanam.value = '';
+                                        tanggalTanam.disabled = false;
+                                        tanggalTanam.value = '';
                                     }
                                     
                                 }
