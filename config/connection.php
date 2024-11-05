@@ -1,3 +1,3 @@
 <?php
-$connect=mysqli_connect('localhost','root','','tatausahakayu');
+$connect=mysqli_connect('localhost','root','','tuk');
 ?>
